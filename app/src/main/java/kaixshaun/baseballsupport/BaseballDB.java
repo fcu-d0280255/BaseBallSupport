@@ -15,20 +15,20 @@ import java.util.List;
 
 public class BaseballDB extends SQLiteOpenHelper{
 
+    SQLiteDatabase db;
 
-    public static final String CREATE_Game_TABLE = "CREATE TABLE Game(GameID,GameName,HomeTeamID,AwayTeamID,HomeScore,AwayScore)";
-    public static final String CREATE_Team_TABLE = "CREATE TABLE Team(TeamID,TeamName)";
-    public static final String CREATE_Inning_TABLE = "CREATE TABLE Inning(GameID,Inning,TopHalf,BottonHalf)";
-    public static final String CREATE_BattingOrder_TABLE = "CREATE TABLE BattingOrder(GameID,TeamID,Back,Order,Rule)";
-    public static final String CREATE_Teammate_TABLE = "CREATE TABLE Teammate(GameID,TeamID,Back,S_B)";
-    public static final String CREATE_Record_TABLE = "CREATE TABLE Record(GameID,TeamID,Back,Inning,Round,Order,Situation,Flyto,Out,RBI,Notes)";
-    public static final String CREATE_FinalData_TABLE = "CREATE TABLE FinalData(GameID,TeamID,Back,Order,rule,PA,BA,OBP,Hit,Walk,Error,RBI)";
-    public static final String CREATE_TeamRecord_TABLE = "CREATE TABLE TeamRecord(GameID,TeamID,TotalHit,TotalWalk,TotalError)";
+    public static final String CREATE_Game_TABLE = "CREATE TABLE IF NOT EXISTS Game(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID TEXT NOT NULL,GameName TEXT,HomeTeamID TEXT NOT NULL,AwayTeamID TEXT NOT NULL,HomeScore INTEGER,AwayScore INTEGER)";
+    public static final String CREATE_Team_TABLE = "CREATE TABLE IF NOT EXISTS Team(_id INTEGER PRIMARY KEY AUTOINCREMENT,TeamID,TeamName);";
+    public static final String CREATE_Inning_TABLE = "CREATE TABLE IF NOT EXISTS Inning(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,Inning,TopHalf,BottonHalf);";
+    public static final String CREATE_BattingOrder_TABLE = "CREATE TABLE IF NOT EXISTS BattingOrder(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,Order,Rule);";
+    public static final String CREATE_Teammate_TABLE = "CREATE TABLE IF NOT EXISTS Teammate(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,S_B);";
+    public static final String CREATE_Record_TABLE = "CREATE TABLE IF NOT EXISTS Record(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,Inning,Round,Order,Situation,Flyto,Out,RBI,Notes)";
+    public static final String CREATE_FinalData_TABLE = "CREATE TABLE IF NOT EXISTS FinalData(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,Order,rule,PA,BA,OBP,Hit,Walk,Error,RBI)";
+    public static final String CREATE_TeamRecord_TABLE = "CREATE TABLE IF NOT EXISTS TeamRecord(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,TotalHit,TotalWalk,TotalError)";
 
-    private SQLiteDatabase db;
 
     public BaseballDB(Context context) {
-        super( context, "baseball.db", null, 1);
+        super( context, "baseball.db", null, 4);
     }
 
     public void onCreate(SQLiteDatabase db) {
@@ -43,6 +43,24 @@ public class BaseballDB extends SQLiteOpenHelper{
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL(" DROP TABLE IF EXISTS Game");
+        db.execSQL(" DROP TABLE IF EXISTS Team");
+        db.execSQL(" DROP TABLE IF EXISTS Inning");
+        db.execSQL(" DROP TABLE IF EXISTS BattingOrder");
+        db.execSQL(" DROP TABLE IF EXISTS Teammate");
+        db.execSQL(" DROP TABLE IF EXISTS Record");
+        db.execSQL(" DROP TABLE IF EXISTS FinalData");
+        db.execSQL(" DROP TABLE IF EXISTS TeamRecord ");
+
+        onCreate(db);
+    }
+
+    public static SQLiteDatabase getDatabase(Context context) {
+        if (db == null || !db.isOpen()) {
+            db = new BaseballDB(context, "baseball.db", null, 4).getWritableDatabase();
+        }
+        return db;
     }
 
     //產生亂數編號
@@ -69,9 +87,9 @@ public class BaseballDB extends SQLiteOpenHelper{
         return rePassword;
     }
 
-    public void close() {
-        db.close();
-    }
+    //public void close() {
+    //    db.close();
+    //}
 
     //輸入新的賽局名稱
     public  String insertGamename(String gamename) {
@@ -79,6 +97,7 @@ public class BaseballDB extends SQLiteOpenHelper{
         String gameid = new String(this.CreatePassWord());
         String hometeamid = new String(this.CreatePassWord());
         String awayteamid = new String(this.CreatePassWord());
+
 
         ContentValues cv = new ContentValues();
 
@@ -89,11 +108,11 @@ public class BaseballDB extends SQLiteOpenHelper{
         cv.put("HomeScore",0);
         cv.put("AwayScore",0);
 
-        db.insert( "Game", null, cv);
+        db.insert("Game", null, cv);
 
         return gameid;
     }
-
+/*
     // 輸入新的後攻方隊名
     public String insertHometeamname(String teamname, String gameid) {
 
@@ -163,14 +182,14 @@ public class BaseballDB extends SQLiteOpenHelper{
         db.insert("Record", null, cv);
     }
 
-    public Cursor getorder(String gameid){
+    public Cursor selestorder(String gameid){
 
         Cursor c = db.rawQuery("select * from BattingOrder where GameID = '"+gameid+"'",null);
 
         return c;
     }
 
-
+*/
 
 
 }

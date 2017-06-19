@@ -11,7 +11,7 @@ import android.widget.Spinner;
 
 public class Key_The_Away_Team_List extends AppCompatActivity {
 
-    BaseballDB db = new BaseballDB();
+    private BaseballDB db;
     //先功方守位變數
     Spinner a_t_d_l_1,a_t_d_l_2,a_t_d_l_3,a_t_d_l_4,a_t_d_l_5,a_t_d_l_6;
     Spinner a_t_d_l_7,a_t_d_l_8,a_t_d_l_9,a_t_d_l_10,a_t_d_l_11;
@@ -100,7 +100,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         public void onClick(View v) {
 
             String awayteamname = a_t_name.getText().toString();
-            String awayteamid = db.insertAwayteamname(setgameid(),awayteamname);
+           /* String awayteamid = db.insertAwayteamname(setgameid(),awayteamname);
             db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_1.getText().toString()),1,a_t_d_l_1.getSelectedItemPosition());
             db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_2.getText().toString()),2,a_t_d_l_2.getSelectedItemPosition());
             db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_3.getText().toString()),3,a_t_d_l_3.getSelectedItemPosition());
@@ -111,7 +111,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
             db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_8.getText().toString()),8,a_t_d_l_8.getSelectedItemPosition());
             db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_9.getText().toString()),9,a_t_d_l_9.getSelectedItemPosition());
             db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_10.getText().toString()),10,a_t_d_l_10.getSelectedItemPosition());
-            db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_11.getText().toString()),11,a_t_d_l_11.getSelectedItemPosition());
+            db.insertBattingorder(setgameid(),awayteamid,Integer.getInteger(a_t_b_n_11.getText().toString()),11,a_t_d_l_11.getSelectedItemPosition());*/
         }
     };
     private View.OnClickListener goto_key_the_home_team_list = new View.OnClickListener() {
