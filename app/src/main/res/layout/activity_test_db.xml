@@ -11,6 +11,6 @@
         android:layout_width="157dp"
         android:layout_height="227dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteX="99dp"
         tools:layout_editor_absoluteY="108dp" />
 </android.support.constraint.ConstraintLayout>

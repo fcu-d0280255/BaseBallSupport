@@ -40,7 +40,7 @@ public class NewGameName extends AppCompatActivity {
             intent.setClass(NewGameName.this,Key_The_Away_Team_List.class);
             gameid = gamename.getText().toString();
             //gameid = db.insertGamename(gamename.getText().toString());
-            Log.v("aaaa",gameid);
+            Log.v("aaaaaaaaa",gameid);
             //intent.putExtra(GameID, gameid);
             startActivity(intent);
         }
