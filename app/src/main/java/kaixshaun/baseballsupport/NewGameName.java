@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class NewGameName extends AppCompatActivity {
     public static final String GameID = "GameID";
-    BaseballDB db;
+    //BaseballDB db = new BaseballDB(NewGameName.this);
     EditText gamename;
     Button enter,cancel;
     String gameid;
@@ -19,7 +19,6 @@ public class NewGameName extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game_name);
 
-        db = new BaseballDB(NewGameName.this);
         gamename = (EditText)findViewById(R.id.game_name);
         enter = (Button)findViewById(R.id.enter_btn);
         cancel = (Button)findViewById(R.id.cancel_btn);
@@ -36,10 +35,10 @@ public class NewGameName extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setClass(NewGameName.this,Key_The_Away_Team_List.class);
             //gameid = gamename.getText().toString();
-            String gameName = gamename.getText().toString();
-            Log.v("test",gameName);
-            gameid = db.insertGamename(gameName);
-            Log.v("test",gameid);
+            //String gameName = gamename.getText().toString();
+            //Log.v("test",gameName);
+            //gameid = db.insertGamename(gameName);
+            //Log.v("test",gameid);
             //intent.putExtra(GameID, gameid);
             startActivity(intent);
         }
