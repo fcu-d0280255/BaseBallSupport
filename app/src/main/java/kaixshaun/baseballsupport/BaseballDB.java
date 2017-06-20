@@ -1,11 +1,9 @@
 package kaixshaun.baseballsupport;
 
-import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
@@ -13,56 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BaseballDB extends SQLiteOpenHelper{
+public class BaseballDB {
 
-    SQLiteDatabase db;
+    private SQLiteDatabase db;
+    public MyDBHelper myDBHelper;
 
-    public static final String CREATE_Game_TABLE = "CREATE TABLE IF NOT EXISTS Game(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID TEXT NOT NULL,GameName TEXT,HomeTeamID TEXT NOT NULL,AwayTeamID TEXT NOT NULL,HomeScore INTEGER,AwayScore INTEGER)";
-    public static final String CREATE_Team_TABLE = "CREATE TABLE IF NOT EXISTS Team(_id INTEGER PRIMARY KEY AUTOINCREMENT,TeamID,TeamName);";
-    public static final String CREATE_Inning_TABLE = "CREATE TABLE IF NOT EXISTS Inning(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,Inning,TopHalf,BottonHalf);";
-    public static final String CREATE_BattingOrder_TABLE = "CREATE TABLE IF NOT EXISTS BattingOrder(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,Order,Rule);";
-    public static final String CREATE_Teammate_TABLE = "CREATE TABLE IF NOT EXISTS Teammate(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,S_B);";
-    public static final String CREATE_Record_TABLE = "CREATE TABLE IF NOT EXISTS Record(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,Inning,Round,Order,Situation,Flyto,Out,RBI,Notes)";
-    public static final String CREATE_FinalData_TABLE = "CREATE TABLE IF NOT EXISTS FinalData(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,Back,Order,rule,PA,BA,OBP,Hit,Walk,Error,RBI)";
-    public static final String CREATE_TeamRecord_TABLE = "CREATE TABLE IF NOT EXISTS TeamRecord(_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID,TeamID,TotalHit,TotalWalk,TotalError)";
+    public BaseballDB(Context context){
 
-
-    public BaseballDB(Context context) {
-        super( context, "baseball.db", null, 4);
+       myDBHelper = new MyDBHelper(context);
+        db =myDBHelper.getWritableDatabase();
     }
 
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_Game_TABLE);
-        db.execSQL(CREATE_Team_TABLE);
-        db.execSQL(CREATE_Inning_TABLE);
-        db.execSQL(CREATE_BattingOrder_TABLE);
-        db.execSQL(CREATE_Teammate_TABLE);
-        db.execSQL(CREATE_Record_TABLE);
-        db.execSQL(CREATE_FinalData_TABLE);
-        db.execSQL(CREATE_TeamRecord_TABLE);
+
+
+    public void close() {
+
+        db.close();
     }
-
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        db.execSQL(" DROP TABLE IF EXISTS Game");
-        db.execSQL(" DROP TABLE IF EXISTS Team");
-        db.execSQL(" DROP TABLE IF EXISTS Inning");
-        db.execSQL(" DROP TABLE IF EXISTS BattingOrder");
-        db.execSQL(" DROP TABLE IF EXISTS Teammate");
-        db.execSQL(" DROP TABLE IF EXISTS Record");
-        db.execSQL(" DROP TABLE IF EXISTS FinalData");
-        db.execSQL(" DROP TABLE IF EXISTS TeamRecord ");
-
-        onCreate(db);
-    }
-
-    public static SQLiteDatabase getDatabase(Context context) {
-        if (db == null || !db.isOpen()) {
-            db = new BaseballDB(context, "baseball.db", null, 4).getWritableDatabase();
-        }
-        return db;
-    }
-
     //產生亂數編號
     public String CreatePassWord(){
         int[] word = new int[8];
@@ -112,7 +77,7 @@ public class BaseballDB extends SQLiteOpenHelper{
 
         return gameid;
     }
-/*
+
     // 輸入新的後攻方隊名
     public String insertHometeamname(String teamname, String gameid) {
 
@@ -130,9 +95,9 @@ public class BaseballDB extends SQLiteOpenHelper{
     // 輸入新的先攻方隊名
     public String insertAwayteamname(String gameid, String teamname) {
 
-        Cursor c = db.rawQuery("select * from Game WHERE GameID = '"+ gameid+"'", null);
-        String awayteamID =  c.getString(c.getColumnIndex("AwayTeamID"));
-        Log.d("awayteamID",awayteamID);
+        Cursor c = db.rawQuery("select AwayTeamID from Game WHERE GameID = '"+ gameid+ "'", null);
+        c.moveToFirst();
+        String awayteamID = c.toString();
         ContentValues cv = new ContentValues();
         cv.put("TeamID", awayteamID);
         cv.put("TeamName",teamname);
@@ -189,7 +154,7 @@ public class BaseballDB extends SQLiteOpenHelper{
         return c;
     }
 
-*/
+
 
 
 }
