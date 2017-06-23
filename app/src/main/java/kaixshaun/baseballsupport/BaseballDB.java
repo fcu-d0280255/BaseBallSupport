@@ -18,8 +18,9 @@ public class BaseballDB {
 
     public BaseballDB(Context context){
 
-       myDBHelper = new MyDBHelper(context);
-        db =myDBHelper.getWritableDatabase();
+            myDBHelper = new MyDBHelper(context);
+            db = myDBHelper.getWritableDatabase();
+
     }
 
 
@@ -52,9 +53,6 @@ public class BaseballDB {
         return rePassword;
     }
 
-    //public void close() {
-    //    db.close();
-    //}
 
     //輸入新的賽局名稱
     public  String insertGamename(String gamename) {
@@ -97,7 +95,7 @@ public class BaseballDB {
 
         Cursor c = db.rawQuery("select AwayTeamID from Game WHERE GameID = '"+ gameid+ "'", null);
         c.moveToFirst();
-        String awayteamID = c.toString();
+        String awayteamID = c.getString(0);
         ContentValues cv = new ContentValues();
         cv.put("TeamID", awayteamID);
         cv.put("TeamName",teamname);
@@ -118,13 +116,13 @@ public class BaseballDB {
     }
 
     //輸入先發名單
-    public void insertBattingorder(String gameid, String teamid, int back, int order, int rule){
+    public void insertBattingorder(String gameid, String teamid, int back,int order, int rule){
 
         ContentValues cv = new ContentValues();
         cv.put("GameID", gameid);
         cv.put("TeamID", teamid);
         cv.put("Back", back);
-        cv.put("Order", order);
+        cv.put("_No", order);
         cv.put("Rule", rule);
         db.insert("BattingOrder", null, cv);
     }
@@ -138,13 +136,27 @@ public class BaseballDB {
         cv.put("Back", back);
         cv.put("Inning", inning);
         cv.put("Round", round);
-        cv.put("Order", order);
+        cv.put("_No", order);
         cv.put("Situation", situation);
         cv.put("Flyto", flyto);
         cv.put("Out", out);
         cv.put("RBI", rbi);
         cv.put("Notes", notes);
         db.insert("Record", null, cv);
+    }
+
+    //刪除先發名單與隊名
+    public boolean deleteStartingOrder(String gameid,String teamid){
+
+        String battingorderwhere = "GameID = '" + gameid + "' AND TeamID =  '" + teamid + "'";
+        String teammatewhere = "GameID = '" + gameid + "' AND TeamID =  '" + teamid + "' AND S_B = 'S' ";
+        String teamnamewhere = "TeamID = '" + teamid +"'";
+
+        long test1 = db.delete("BattingOrder", battingorderwhere, null);
+        long test2 = db.delete("Teammate", teammatewhere, null);
+        long test3 = db.delete("Team", teamnamewhere, null);
+
+        return test1*test2*test3 > 0;
     }
 
     public Cursor selestorder(String gameid){

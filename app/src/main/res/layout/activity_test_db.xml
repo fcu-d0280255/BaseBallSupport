@@ -7,7 +7,7 @@
     tools:context="kaixshaun.baseballsupport.TestDB">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/testtextView"
         android:layout_width="157dp"
         android:layout_height="227dp"
         android:text="TextView"

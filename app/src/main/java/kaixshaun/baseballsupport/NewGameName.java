@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class NewGameName extends AppCompatActivity {
     public static final String GameID = "GameID";
-    //BaseballDB db = new BaseballDB(NewGameName.this);
+    BaseballDB db;
     EditText gamename;
     Button enter,cancel;
     String gameid;
@@ -22,7 +22,7 @@ public class NewGameName extends AppCompatActivity {
         gamename = (EditText)findViewById(R.id.game_name);
         enter = (Button)findViewById(R.id.enter_btn);
         cancel = (Button)findViewById(R.id.cancel_btn);
-
+        db = new BaseballDB(this);
         enter.setOnClickListener(goto_key_the_away_list);
 
     }
@@ -31,15 +31,20 @@ public class NewGameName extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-
             Intent intent = new Intent();
+
+            //換頁面的參數
             intent.setClass(NewGameName.this,Key_The_Away_Team_List.class);
-            //gameid = gamename.getText().toString();
-            //String gameName = gamename.getText().toString();
-            //Log.v("test",gameName);
-            //gameid = db.insertGamename(gameName);
-            //Log.v("test",gameid);
-            //intent.putExtra(GameID, gameid);
+
+            //得到gameid
+            String gameName = gamename.getText().toString();
+            Log.v("test",gameName);
+            gameid = db.insertGamename(gameName);
+            Log.v("test",gameid);
+
+            //傳gameid給別的activity
+            intent.putExtra(GameID, gameid);
+
             startActivity(intent);
         }
     };
