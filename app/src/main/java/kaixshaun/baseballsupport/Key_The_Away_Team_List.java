@@ -9,10 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Key_The_Away_Team_List extends AppCompatActivity {
 
-    public static final String GameID = "GameID";
     public static final String AwayTeamID = "AwayTeamID";
     BaseballDB db;
     private String gameid ;
@@ -26,7 +26,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
     private EditText a_t_b_n_7,a_t_b_n_8,a_t_b_n_9,a_t_b_n_10,a_t_b_n_11;
     private EditText a_t_name;
 
-    private Button key_a_t_bench_l,key_t_h_t_l,store_t_a_t_l,cancel_t_a_t_l,start_t_g_at;
+    private Button key_a_t_bench_l,store_t_a_t_l;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +40,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
 
         declare();
 
-        //跳去後攻隊員名單的按鈕功能
-        key_t_h_t_l = (Button)findViewById(R.id.key_the_home_team_list_btn);
-        key_t_h_t_l.setOnClickListener(goto_key_the_home_team_list);
-
-        //跳去輸入後攻候補名單功能
+        //跳去輸入先攻候補名單功能
         key_a_t_bench_l = (Button)findViewById(R.id.key_the_away_team_bench_list_btn);
         key_a_t_bench_l.setOnClickListener(goto_key_the_away_team_bench_list);
 
@@ -52,26 +48,8 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         store_t_a_t_l = (Button)findViewById(R.id.store_the_away_team_list_btn);
         store_t_a_t_l.setOnClickListener(store_the_away_team_list);
 
-        //開始遊比賽按鈕
-        start_t_g_at = (Button)findViewById(R.id.start_the_game_at_btn);
-        start_t_g_at.setOnClickListener(testaaaaa);
-
-        //取消按鈕
-        cancel_t_a_t_l = (Button)findViewById(R.id.cancel_the_away_team_list_btn);
-        cancel_t_a_t_l.setOnClickListener(cancel_the_away_team_list);
     }
 
-    private View.OnClickListener testaaaaa = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent intent = new Intent();
-            intent.putExtra(GameID, gameid);
-            intent.putExtra(AwayTeamID, awayteamid);
-            intent.setClass(Key_The_Away_Team_List.this,TestDB.class);
-            startActivity(intent);
-        }
-    };
 
 
     private View.OnClickListener store_the_away_team_list = new View.OnClickListener() {
@@ -91,34 +69,9 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
             awayteamid = db.insertAwayteamname(gameid,awayteamname);
 
             settingorder();
-        }
-    };
+            Toast toast = Toast.makeText(Key_The_Away_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
+            toast.show();
 
-    private View.OnClickListener cancel_the_away_team_list = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent intent = new Intent();
-            if( awayteamid != null){
-
-                if(db.deleteStartingOrder(gameid,awayteamid))
-                    Log.v("delete","successful");
-                else
-                    Log.v("delete","fail");
-            }
-            intent.setClass(Key_The_Away_Team_List.this,StartPage.class);
-            startActivity(intent);
-        }
-    };
-
-    private View.OnClickListener goto_key_the_home_team_list = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent intent = new Intent();
-            intent.putExtra(GameID, gameid);
-            intent.setClass(Key_The_Away_Team_List.this,Key_The_Home_Team_List.class);
-            startActivity(intent);
         }
     };
 
@@ -127,10 +80,18 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         public void onClick(View v) {
 
             Intent intent = new Intent();
-            intent.putExtra(GameID, gameid);
             intent.putExtra(AwayTeamID, awayteamid);
             intent.setClass(Key_The_Away_Team_List.this,Away_Team_Bench_List.class);
-            startActivity(intent);
+            if(judgment()){
+
+                Toast toast = Toast.makeText(Key_The_Away_Team_List.this,"請填好名單並儲存!!",Toast.LENGTH_LONG);
+                toast.show();
+            }
+            else{
+
+                startActivity(intent);
+                Key_The_Away_Team_List.this.finish();
+            }
         }
     };
 
@@ -148,6 +109,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         a_t_b_n_9 = (EditText)findViewById(R.id.away_team_back_number_9);
         a_t_b_n_10 = (EditText)findViewById(R.id.away_team_back_number_10);
         a_t_b_n_11 = (EditText)findViewById(R.id.away_team_back_number_11);
+
 
 
         final String[] defense = {"無","投手","捕手","一壘手","二壘手","三壘手","游擊手","左外野手","中外野手","右外野手","自由手","指名打擊"};
@@ -245,5 +207,14 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_n_11),"S");
         }
 
+    }
+
+    //判斷資料有沒有齊全並且儲存
+    private boolean judgment(){
+
+        return ("".equals(a_t_b_n_1.getText().toString().trim()) || "".equals(a_t_b_n_2.getText().toString().trim())|| "".equals(a_t_b_n_3.getText().toString().trim())
+        ||"".equals(a_t_b_n_4.getText().toString().trim())||"".equals(a_t_b_n_5.getText().toString().trim())||"".equals(a_t_b_n_6.getText().toString().trim())
+        ||"".equals(a_t_b_n_7.getText().toString().trim())||"".equals(a_t_b_n_8.getText().toString().trim())||"".equals(a_t_b_n_9.getText().toString().trim())
+        ||"".equals(a_t_b_n_10.getText().toString().trim()));
     }
 }

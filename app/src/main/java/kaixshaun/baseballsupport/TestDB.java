@@ -42,7 +42,7 @@ public class TestDB extends AppCompatActivity {
     public void setid(){
 
         Intent intent = getIntent();
-        gameid = intent.getStringExtra(Key_The_Away_Team_List.GameID);
+        gameid = intent.getStringExtra(NewGameName.GameID);
         awayteamid = intent.getStringExtra(Key_The_Away_Team_List.AwayTeamID);
     }
 }

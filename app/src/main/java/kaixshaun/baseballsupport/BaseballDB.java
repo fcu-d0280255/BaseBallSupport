@@ -17,9 +17,10 @@ public class BaseballDB {
     public MyDBHelper myDBHelper;
 
     public BaseballDB(Context context){
-
+        if(db == null || !db.isOpen()) {
             myDBHelper = new MyDBHelper(context);
             db = myDBHelper.getWritableDatabase();
+        }
 
     }
 
@@ -157,6 +158,13 @@ public class BaseballDB {
         long test3 = db.delete("Team", teamnamewhere, null);
 
         return test1*test2*test3 > 0;
+    }
+
+    public boolean deleteStartingBenchOrder(String gameid,String teamid){
+
+
+        String teammate = "GameID = '" + gameid + "' AND TeamID =  '" + teamid + "' AND S_B = 'B' ";
+        return db.delete("Teammate", teammate, null)>0;
     }
 
     public Cursor selestorder(String gameid){

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewGameName extends AppCompatActivity {
     public static final String GameID = "GameID";
@@ -44,8 +45,13 @@ public class NewGameName extends AppCompatActivity {
 
             //傳gameid給別的activity
             intent.putExtra(GameID, gameid);
+            if("".equals(gamename.getText().toString().trim())){
 
-            startActivity(intent);
+                Toast toast = Toast.makeText(NewGameName.this,"請輸入比賽名稱",Toast.LENGTH_LONG);
+                toast.show();
+            }
+            else
+                startActivity(intent);
         }
     };
 }
