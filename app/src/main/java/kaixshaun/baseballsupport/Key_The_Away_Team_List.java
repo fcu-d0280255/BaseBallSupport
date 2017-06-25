@@ -14,9 +14,10 @@ import android.widget.Toast;
 public class Key_The_Away_Team_List extends AppCompatActivity {
 
     public static final String AwayTeamID = "AwayTeamID";
+    public static final String GameID = "GameID";
     BaseballDB db;
-    private String gameid ;
-    private String awayteamid ;
+    private String gameid;
+    private String awayteamid;
 
     //先功方守位變數
     private Spinner a_t_d_l_1,a_t_d_l_2,a_t_d_l_3,a_t_d_l_4,a_t_d_l_5,a_t_d_l_6;
@@ -81,6 +82,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
 
             Intent intent = new Intent();
             intent.putExtra(AwayTeamID, awayteamid);
+            intent.putExtra(GameID, gameid);
             intent.setClass(Key_The_Away_Team_List.this,Away_Team_Bench_List.class);
             if(judgment()){
 

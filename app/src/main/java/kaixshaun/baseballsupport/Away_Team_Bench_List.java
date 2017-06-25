@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 public class Away_Team_Bench_List extends AppCompatActivity {
 
+    public static final String AwayTeamID = "AwayTeamID";
+    public static final String GameID = "GameID";
+
     EditText a_t_b_1,a_t_b_2,a_t_b_3,a_t_b_4,a_t_b_5,a_t_b_6,a_t_b_7,a_t_b_8;
     EditText a_t_b_9,a_t_b_10,a_t_b_11,a_t_b_12,a_t_b_13,a_t_b_14,a_t_b_15;
     Button store_a_t_b_btn,key_hometeam_list_btn;
@@ -51,6 +54,8 @@ public class Away_Team_Bench_List extends AppCompatActivity {
         public void onClick(View v) {
 
             Intent intent = new Intent();
+            intent.putExtra(AwayTeamID, awayteamid);
+            intent.putExtra(GameID, gameid);
             intent.setClass(Away_Team_Bench_List.this,Key_The_Home_Team_List.class);
             startActivity(intent);
             Away_Team_Bench_List.this.finish();
@@ -61,7 +66,7 @@ public class Away_Team_Bench_List extends AppCompatActivity {
     private String setgameid(){
 
         Intent intent = getIntent();
-        String temp = intent.getStringExtra(NewGameName.GameID);
+        String temp = intent.getStringExtra(Key_The_Away_Team_List.GameID);
         return temp;
     }
 
