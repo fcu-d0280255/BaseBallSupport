@@ -13,15 +13,15 @@ import android.widget.Toast;
 
 public class Key_The_Home_Team_List extends AppCompatActivity {
 
+    BaseballDB db;
     public static final String HomeTeamID = "HomeTeamID";
     public static final String AwayteamID = "AwayTeamID";
     public static final String GameID = "GameID";
-    BaseballDB db;
     private String gameid, awayteamid, hometeamid;
 
     //後攻方守位變數
     EditText h_t_b_n_1, h_t_b_n_2, h_t_b_n_3, h_t_b_n_4, h_t_b_n_5, h_t_b_n_6;
-    EditText h_t_b_n_7, h_t_b_n_8, h_t_b_n_9, h_t_b_n_10, h_t_b_n_11, a_t_name;
+    EditText h_t_b_n_7, h_t_b_n_8, h_t_b_n_9, h_t_b_n_10, h_t_b_n_11, h_t_name;
     Spinner h_t_d_l_1, h_t_d_l_2, h_t_d_l_3, h_t_d_l_4, h_t_d_l_5, h_t_d_l_6;
     Spinner h_t_d_l_7, h_t_d_l_8, h_t_d_l_9, h_t_d_l_10, h_t_d_l_11;
 
@@ -32,17 +32,22 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_key__the__home__team__list);
 
-        gameid = Key_The_Home_Team_List.this.setgameid();
+        gameid = setgameid();
+        awayteamid = setawayteamid();
+
         db = new BaseballDB(this);
         Log.v("GameID", gameid);
-        a_t_name = (EditText) findViewById(R.id.away_team_name);
+        h_t_name = (EditText) findViewById(R.id.away_team_name);
         declare();
 
         //跳去輸入後攻候補名單功能
         key_h_t_bench_l = (Button) findViewById(R.id.key_the_home_team_bench_list_btn);
         key_h_t_bench_l.setOnClickListener(goto_key_the_home_team_bench_list);
-    }
 
+        //儲存儲存先發名單
+        store_t_h_t_l =(Button)findViewById(R.id.store_the_home_team_list_btn);
+        store_t_h_t_l.setOnClickListener(store_the_home_team_list);
+    }
 
     private View.OnClickListener goto_key_the_home_team_bench_list = new View.OnClickListener() {
         @Override
@@ -50,18 +55,42 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
 
             Intent intent = new Intent();
             intent.putExtra(AwayteamID, awayteamid);
-            intent.putExtra(HomeTeamID, hometeamid)
+            intent.putExtra(HomeTeamID, hometeamid);
             intent.putExtra(GameID, gameid);
-            intent.setClass(Key_The_Away_Team_List.this, Away_Team_Bench_List.class);
+            intent.setClass(Key_The_Home_Team_List.this, Home_Team_Bench_List.class);
             if (judgment()) {
 
-                Toast toast = Toast.makeText(Key_The_Away_Team_List.this, "請填好名單並儲存!!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(Key_The_Home_Team_List.this, "請填好名單並儲存!!", Toast.LENGTH_LONG);
                 toast.show();
             } else {
 
                 startActivity(intent);
-                Key_The_Away_Team_List.this.finish();
+                Key_The_Home_Team_List.this.finish();
             }
+        }
+    };
+
+    private View.OnClickListener store_the_home_team_list = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            if( hometeamid != null){
+
+                if(db.deleteStartingOrder(gameid,hometeamid))
+                    Log.v("delete","successful");
+                else
+                    Log.v("delete","fail");
+
+            }
+
+            String hometeamname = h_t_name.getText().toString();
+            hometeamid = db.insertAwayteamname(gameid, hometeamname);
+
+
+            settingorder();
+            Toast toast = Toast.makeText(Key_The_Home_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
+            toast.show();
+
         }
     };
 
@@ -122,6 +151,45 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
     private int getrule(Spinner rule) {
 
         return turnrule(rule.getSelectedItem().toString());
+    }
+
+    //將先發名單與球員名單儲入資料庫
+    private void settingorder(){
+
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_1),1,getrule(h_t_d_l_1));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_1),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_2), 2,getrule(h_t_d_l_2));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_2),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_3), 3,getrule(h_t_d_l_3));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_3),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_4), 4,getrule(h_t_d_l_4));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_4),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_5), 5,getrule(h_t_d_l_5));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_5),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_6), 6,getrule(h_t_d_l_6));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_6),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_7), 7,getrule(h_t_d_l_7));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_7),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_8), 8,getrule(h_t_d_l_8));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_8),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_9), 9,getrule(h_t_d_l_9));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_9),"S");
+
+        db.insertBattingorder(gameid,awayteamid,turnback(h_t_b_n_10), 10,getrule(h_t_d_l_10));
+        db.insertTeammate(gameid,awayteamid,turnback(h_t_b_n_10),"S");
+        if(getrule(h_t_d_l_11) != 0) {
+            db.insertBattingorder(gameid, hometeamid, turnback(h_t_b_n_11), 11, getrule(h_t_d_l_11));
+            db.insertTeammate(gameid, hometeamid,turnback(h_t_b_n_11),"S");
+        }
+
+    }
+
+    private boolean judgment(){
+
+        return ("".equals(h_t_b_n_1.getText().toString().trim()) || "".equals(h_t_b_n_2.getText().toString().trim())|| "".equals(h_t_b_n_3.getText().toString().trim())
+                ||"".equals(h_t_b_n_4.getText().toString().trim())||"".equals(h_t_b_n_5.getText().toString().trim())||"".equals(h_t_b_n_6.getText().toString().trim())
+                ||"".equals(h_t_b_n_7.getText().toString().trim())||"".equals(h_t_b_n_8.getText().toString().trim())||"".equals(h_t_b_n_9.getText().toString().trim())
+                ||"".equals(h_t_b_n_10.getText().toString().trim())||"".equals(h_t_name.getText().toString().trim()));
     }
 
     //整理宣告

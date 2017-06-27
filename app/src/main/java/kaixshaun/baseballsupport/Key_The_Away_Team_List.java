@@ -16,8 +16,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
     public static final String AwayTeamID = "AwayTeamID";
     public static final String GameID = "GameID";
     BaseballDB db;
-    private String gameid;
-    private String awayteamid;
+    private String gameid,awayteamid,awayteamname;
 
     //先功方守位變數
     private Spinner a_t_d_l_1,a_t_d_l_2,a_t_d_l_3,a_t_d_l_4,a_t_d_l_5,a_t_d_l_6;
@@ -66,8 +65,9 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
 
             }
 
-            String awayteamname = a_t_name.getText().toString();
-            awayteamid = db.insertAwayteamname(gameid,awayteamname);
+            awayteamname = a_t_name.getText().toString();
+            awayteamid = db.insertAwayteamname(gameid, awayteamname);
+
 
             settingorder();
             Toast toast = Toast.makeText(Key_The_Away_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
@@ -217,6 +217,6 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         return ("".equals(a_t_b_n_1.getText().toString().trim()) || "".equals(a_t_b_n_2.getText().toString().trim())|| "".equals(a_t_b_n_3.getText().toString().trim())
         ||"".equals(a_t_b_n_4.getText().toString().trim())||"".equals(a_t_b_n_5.getText().toString().trim())||"".equals(a_t_b_n_6.getText().toString().trim())
         ||"".equals(a_t_b_n_7.getText().toString().trim())||"".equals(a_t_b_n_8.getText().toString().trim())||"".equals(a_t_b_n_9.getText().toString().trim())
-        ||"".equals(a_t_b_n_10.getText().toString().trim()));
+        ||"".equals(a_t_b_n_10.getText().toString().trim())||"".equals(a_t_name.getText().toString().trim()));
     }
 }

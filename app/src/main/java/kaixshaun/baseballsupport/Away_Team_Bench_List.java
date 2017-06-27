@@ -135,7 +135,7 @@ public class Away_Team_Bench_List extends AppCompatActivity {
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_13),"B");
         if(!"".equals(a_t_b_14.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_14),"B");
-        if(!"".equals(a_t_b_1.getText().toString().trim()))
+        if(!"".equals(a_t_b_15.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_15),"B");
     }
 }
