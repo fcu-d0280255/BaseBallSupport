@@ -15,9 +15,9 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
 
     BaseballDB db;
     public static final String HomeTeamID = "HomeTeamID";
-    public static final String AwayteamID = "AwayTeamID";
+    public static final String AwayTeamID = "AwayTeamID";
     public static final String GameID = "GameID";
-    private String gameid, awayteamid, hometeamid;
+    private String gameid = null, awayteamid=null, hometeamid=null,hometeamname=null;
 
     //後攻方守位變數
     EditText h_t_b_n_1, h_t_b_n_2, h_t_b_n_3, h_t_b_n_4, h_t_b_n_5, h_t_b_n_6;
@@ -37,7 +37,8 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
 
         db = new BaseballDB(this);
         Log.v("GameID", gameid);
-        h_t_name = (EditText) findViewById(R.id.away_team_name);
+        h_t_name = (EditText) findViewById(R.id.home_team_name);
+
         declare();
 
         //跳去輸入後攻候補名單功能
@@ -53,17 +54,18 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            Intent intent = new Intent();
-            intent.putExtra(AwayteamID, awayteamid);
-            intent.putExtra(HomeTeamID, hometeamid);
-            intent.putExtra(GameID, gameid);
-            intent.setClass(Key_The_Home_Team_List.this, Home_Team_Bench_List.class);
+
             if (judgment()) {
 
                 Toast toast = Toast.makeText(Key_The_Home_Team_List.this, "請填好名單並儲存!!", Toast.LENGTH_LONG);
                 toast.show();
             } else {
 
+                Intent intent = new Intent();
+                intent.putExtra(AwayTeamID, awayteamid);
+                intent.putExtra(HomeTeamID, hometeamid);
+                intent.putExtra(GameID, gameid);
+                intent.setClass(Key_The_Home_Team_List.this, Home_Team_Bench_List.class);
                 startActivity(intent);
                 Key_The_Home_Team_List.this.finish();
             }
@@ -83,11 +85,13 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
 
             }
 
-            String hometeamname = h_t_name.getText().toString();
-            hometeamid = db.insertAwayteamname(gameid, hometeamname);
 
+            if(!judgment()) {
 
-            settingorder();
+                hometeamname = h_t_name.getText().toString();
+                hometeamid = db.insertHometeamname(gameid, hometeamname);
+                settingorder();
+            }
             Toast toast = Toast.makeText(Key_The_Home_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
             toast.show();
 
@@ -174,10 +178,11 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_8),"S");
         db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_9), 9,getrule(h_t_d_l_9));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_9),"S");
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_10), 10,getrule(h_t_d_l_10));
+        db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_10),"S");
 
-        db.insertBattingorder(gameid,awayteamid,turnback(h_t_b_n_10), 10,getrule(h_t_d_l_10));
-        db.insertTeammate(gameid,awayteamid,turnback(h_t_b_n_10),"S");
         if(getrule(h_t_d_l_11) != 0) {
+
             db.insertBattingorder(gameid, hometeamid, turnback(h_t_b_n_11), 11, getrule(h_t_d_l_11));
             db.insertTeammate(gameid, hometeamid,turnback(h_t_b_n_11),"S");
         }

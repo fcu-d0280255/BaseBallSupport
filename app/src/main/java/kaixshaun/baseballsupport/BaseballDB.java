@@ -78,11 +78,11 @@ public class BaseballDB {
     }
 
     // 輸入新的後攻方隊名
-    public String insertHometeamname(String teamname, String gameid) {
+    public String insertHometeamname(String gameid, String teamname) {
 
-        Cursor c = db.rawQuery("select * from Game WHERE GameID =  '"+ gameid+"'", null);
-        String hometeamID = c.getString(c.getColumnIndex("HomeTeamID"));
-
+        Cursor c = db.rawQuery("select AwayTeamID from Game WHERE GameID =  '"+ gameid+"'", null);
+        c.moveToFirst();
+        String hometeamID = c.getString(0);
         ContentValues cv = new ContentValues();
         cv.put("TeamID", hometeamID);
         cv.put("TeamName",teamname);

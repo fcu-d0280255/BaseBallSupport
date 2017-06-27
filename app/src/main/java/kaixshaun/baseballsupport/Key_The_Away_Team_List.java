@@ -16,7 +16,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
     public static final String AwayTeamID = "AwayTeamID";
     public static final String GameID = "GameID";
     BaseballDB db;
-    private String gameid,awayteamid,awayteamname;
+    private String gameid = null,awayteamid = null,awayteamname = null;
 
     //先功方守位變數
     private Spinner a_t_d_l_1,a_t_d_l_2,a_t_d_l_3,a_t_d_l_4,a_t_d_l_5,a_t_d_l_6;
@@ -56,6 +56,8 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
+            Toast toast;
+
             if( awayteamid != null){
 
                 if(db.deleteStartingOrder(gameid,awayteamid))
@@ -65,13 +67,19 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
 
             }
 
-            awayteamname = a_t_name.getText().toString();
-            awayteamid = db.insertAwayteamname(gameid, awayteamname);
 
+            if(!judgment()){
 
-            settingorder();
-            Toast toast = Toast.makeText(Key_The_Away_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
+                awayteamname = a_t_name.getText().toString();
+                awayteamid = db.insertAwayteamname(gameid, awayteamname);
+                settingorder();
+                toast = Toast.makeText(Key_The_Away_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
+            }
+            else
+                toast = Toast.makeText(Key_The_Away_Team_List.this,"儲存失敗",Toast.LENGTH_LONG);
+
             toast.show();
+
 
         }
     };
@@ -201,9 +209,9 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         db.insertTeammate(gameid,awayteamid,turnback(a_t_b_n_8),"S");
         db.insertBattingorder(gameid,awayteamid,turnback(a_t_b_n_9), 9,getrule(a_t_d_l_9));
         db.insertTeammate(gameid,awayteamid,turnback(a_t_b_n_9),"S");
-
         db.insertBattingorder(gameid,awayteamid,turnback(a_t_b_n_10), 10,getrule(a_t_d_l_10));
         db.insertTeammate(gameid,awayteamid,turnback(a_t_b_n_10),"S");
+
         if(getrule(a_t_d_l_11) != 0) {
             db.insertBattingorder(gameid, awayteamid, turnback(a_t_b_n_11), 11, getrule(a_t_d_l_11));
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_n_11),"S");

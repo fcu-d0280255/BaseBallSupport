@@ -434,14 +434,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="儲存候補名單" />
+                android:text="儲存候補名單"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/Key_The_Home_Team_Starting_List_Btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="填寫後攻先發" />
+                android:text="填寫後攻先發"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>

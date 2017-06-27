@@ -18,6 +18,7 @@ public class Away_Team_Bench_List extends AppCompatActivity {
     EditText a_t_b_9,a_t_b_10,a_t_b_11,a_t_b_12,a_t_b_13,a_t_b_14,a_t_b_15;
     Button store_a_t_b_btn,key_hometeam_list_btn;
     BaseballDB db;
+
     private String gameid,awayteamid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,8 @@ public class Away_Team_Bench_List extends AppCompatActivity {
 
         declare();
         gameid = setgameid();
-        awayteamid =setawayteamid();
+        awayteamid = setawayteamid();
+
         db =new BaseballDB(this);
         settingbench();
 

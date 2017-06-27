@@ -431,17 +431,19 @@
 
             <Button
                 android:id="@+id/store_home_team_bench_list_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="儲存" />
+                android:text="儲存候補名單"
+                android:textSize="20sp" />
 
             <Button
-                android:id="@+id/cancel_home_team_bench_list_btn"
-                android:layout_width="wrap_content"
+                android:id="@+id/StartGame_btn"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="取消" />
+                android:text="比賽開始"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
