@@ -179,7 +179,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
     //轉換背號
     private int turnback(EditText back){
 
-        return Integer.parseInt(back.getText().toString());
+        return Integer.parseInt(back.getText().toString().trim());
     }
 
     //得到守備位置
@@ -212,7 +212,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         db.insertBattingorder(gameid,awayteamid,turnback(a_t_b_n_10), 10,getrule(a_t_d_l_10));
         db.insertTeammate(gameid,awayteamid,turnback(a_t_b_n_10),"S");
 
-        if(getrule(a_t_d_l_11) != 0) {
+        if(getrule(a_t_d_l_11) != 0&&!"".equals(a_t_name.getText().toString().trim())) {
             db.insertBattingorder(gameid, awayteamid, turnback(a_t_b_n_11), 11, getrule(a_t_d_l_11));
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_n_11),"S");
         }
@@ -225,6 +225,6 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
         return ("".equals(a_t_b_n_1.getText().toString().trim()) || "".equals(a_t_b_n_2.getText().toString().trim())|| "".equals(a_t_b_n_3.getText().toString().trim())
         ||"".equals(a_t_b_n_4.getText().toString().trim())||"".equals(a_t_b_n_5.getText().toString().trim())||"".equals(a_t_b_n_6.getText().toString().trim())
         ||"".equals(a_t_b_n_7.getText().toString().trim())||"".equals(a_t_b_n_8.getText().toString().trim())||"".equals(a_t_b_n_9.getText().toString().trim())
-        ||"".equals(a_t_b_n_10.getText().toString().trim())||"".equals(a_t_name.getText().toString().trim()));
+        ||"".equals(a_t_b_n_10.getText().toString().trim()));
     }
 }
