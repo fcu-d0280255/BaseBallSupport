@@ -215,7 +215,7 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         h_t_b_n_10 = (EditText) findViewById(R.id.home_team_back_number_10);
         h_t_b_n_11 = (EditText) findViewById(R.id.home_team_back_number_11);
 
-        final String[] defense = {"捕手", "投手", "一壘手", "二壘手", "游擊手", "三壘手", "自由手", "右外野手", "中外野手", "左外野手", "指名打擊", "無"};
+        final String[] defense = {"無","投手","捕手","一壘手","二壘手","三壘手","游擊手","左外野手","中外野手","右外野手","自由手","指名打擊"};
         h_t_d_l_1 = (Spinner) findViewById(R.id.home_team_defense_location_1);
         h_t_d_l_2 = (Spinner) findViewById(R.id.home_team_defense_location_2);
         h_t_d_l_3 = (Spinner) findViewById(R.id.home_team_defense_location_3);

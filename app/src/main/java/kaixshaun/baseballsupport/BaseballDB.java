@@ -80,7 +80,7 @@ public class BaseballDB {
     // 輸入新的後攻方隊名
     public String insertHometeamname(String gameid, String teamname) {
 
-        Cursor c = db.rawQuery("select AwayTeamID from Game WHERE GameID =  '"+ gameid+"'", null);
+        Cursor c = db.rawQuery("select HomeTeamID from Game WHERE GameID =  '"+ gameid+"'", null);
         c.moveToFirst();
         String hometeamID = c.getString(0);
         ContentValues cv = new ContentValues();
@@ -167,14 +167,23 @@ public class BaseballDB {
         return db.delete("Teammate", teammate, null)>0;
     }
 
-    public Cursor selestorder(String gameid){
+    public Cursor selsectteam(String teamid){
 
-        Cursor c = db.rawQuery("select * from BattingOrder where GameID = '"+gameid+"'",null);
-
+        Cursor c = db.rawQuery("select * from Team where TeamID = '" + teamid + "'",null);
         return c;
     }
 
+    public Cursor selestorder(String gameid,String teamid){
 
+        Cursor c = db.rawQuery("select * from BattingOrder where GameID = '" + gameid + "' AND TeamID = '" + teamid + "'",null);
+        return c;
+    }
+
+    public Cursor selectteamate(String gameid, String teamid){
+
+        Cursor c = db.rawQuery("select * from Teammate where GameID = '" + gameid + "' AND TeamID = '" + teamid + "'",null);
+        return c;
+    }
 
 
 }

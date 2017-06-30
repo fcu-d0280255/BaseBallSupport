@@ -20,7 +20,6 @@
         <activity android:name=".Key_The_Home_Team_List" />
         <activity android:name=".Away_Team_Bench_List" />
         <activity android:name=".Home_Team_Bench_List" />
-        <activity android:name=".TestDB" />
         <activity android:name=".GameRecording"></activity>
     </application>
 
