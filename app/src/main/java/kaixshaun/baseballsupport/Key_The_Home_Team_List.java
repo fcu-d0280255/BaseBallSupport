@@ -55,17 +55,17 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         public void onClick(View v) {
 
 
+            Intent intent = new Intent();
+            intent.putExtra(AwayTeamID, awayteamid);
+            intent.putExtra(HomeTeamID, hometeamid);
+            intent.putExtra(GameID, gameid);
+            intent.setClass(Key_The_Home_Team_List.this, Home_Team_Bench_List.class);
             if (judgment()) {
 
                 Toast toast = Toast.makeText(Key_The_Home_Team_List.this, "請填好名單並儲存!!", Toast.LENGTH_LONG);
                 toast.show();
             } else {
 
-                Intent intent = new Intent();
-                intent.putExtra(AwayTeamID, awayteamid);
-                intent.putExtra(HomeTeamID, hometeamid);
-                intent.putExtra(GameID, gameid);
-                intent.setClass(Key_The_Home_Team_List.this, Home_Team_Bench_List.class);
                 startActivity(intent);
                 Key_The_Home_Team_List.this.finish();
             }
@@ -76,6 +76,7 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
+            Toast toast;
             if( hometeamid != null){
 
                 if(db.deleteStartingOrder(gameid,hometeamid))
@@ -91,8 +92,10 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
                 hometeamname = h_t_name.getText().toString();
                 hometeamid = db.insertHometeamname(gameid, hometeamname);
                 settingorder();
+                toast = Toast.makeText(Key_The_Home_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
             }
-            Toast toast = Toast.makeText(Key_The_Home_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
+            else
+                toast = Toast.makeText(Key_The_Home_Team_List.this,"儲存失敗",Toast.LENGTH_LONG);
             toast.show();
 
         }
@@ -148,7 +151,7 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
     //轉換背號
     private int turnback(EditText back) {
 
-        return Integer.parseInt(back.getText().toString());
+        return Integer.parseInt(back.getText().toString().trim());
     }
 
     //得到守備位置
@@ -181,7 +184,7 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_10), 10,getrule(h_t_d_l_10));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_10),"S");
 
-        if(getrule(h_t_d_l_11) != 0) {
+        if(getrule(h_t_d_l_11) != 0&&!"".equals(h_t_name.getText().toString().trim())) {
 
             db.insertBattingorder(gameid, hometeamid, turnback(h_t_b_n_11), 11, getrule(h_t_d_l_11));
             db.insertTeammate(gameid, hometeamid,turnback(h_t_b_n_11),"S");
@@ -194,7 +197,7 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         return ("".equals(h_t_b_n_1.getText().toString().trim()) || "".equals(h_t_b_n_2.getText().toString().trim())|| "".equals(h_t_b_n_3.getText().toString().trim())
                 ||"".equals(h_t_b_n_4.getText().toString().trim())||"".equals(h_t_b_n_5.getText().toString().trim())||"".equals(h_t_b_n_6.getText().toString().trim())
                 ||"".equals(h_t_b_n_7.getText().toString().trim())||"".equals(h_t_b_n_8.getText().toString().trim())||"".equals(h_t_b_n_9.getText().toString().trim())
-                ||"".equals(h_t_b_n_10.getText().toString().trim())||"".equals(h_t_name.getText().toString().trim()));
+                ||"".equals(h_t_b_n_10.getText().toString().trim()));
     }
 
     //整理宣告

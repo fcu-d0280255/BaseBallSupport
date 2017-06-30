@@ -30,7 +30,6 @@ public class Away_Team_Bench_List extends AppCompatActivity {
         awayteamid = setawayteamid();
 
         db =new BaseballDB(this);
-        settingbench();
 
         store_a_t_b_btn = (Button)findViewById(R.id.store_away_team_bench_list_btn);
         store_a_t_b_btn.setOnClickListener(store_awayteam_bench_list);

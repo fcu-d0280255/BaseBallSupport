@@ -16,7 +16,7 @@ public class Home_Team_Bench_List extends AppCompatActivity {
 
     EditText h_t_b_1,h_t_b_2,h_t_b_3,h_t_b_4,h_t_b_5,h_t_b_6,h_t_b_7,h_t_b_8;
     EditText h_t_b_9,h_t_b_10,h_t_b_11,h_t_b_12,h_t_b_13,h_t_b_14,h_t_b_15;
-    Button store_h_t_b_btn,key_hometeam_list_btn;
+    Button store_h_t_b_btn,startgame_btn;
     BaseballDB db;
 
     private String gameid, awayteamid, hometeamid;
@@ -27,20 +27,18 @@ public class Home_Team_Bench_List extends AppCompatActivity {
         setContentView(R.layout.activity_home__team__bench__list);
 
 
-
+        db =new BaseballDB(this);
         declare();
         gameid = setgameid();
         awayteamid = setawayteamid();
         hometeamid = sethometeamid();
 
-        db =new BaseballDB(this);
-        settingbench();
 
-        store_h_t_b_btn = (Button)findViewById(R.id.store_the_home_team_list_btn);
+        store_h_t_b_btn = (Button)findViewById(R.id.store_home_team_bench_list_btn);
         store_h_t_b_btn.setOnClickListener(store_hometeam_bench_list);
 
-        key_hometeam_list_btn = (Button)findViewById(R.id.Key_The_Home_Team_Starting_List_Btn);
-        key_hometeam_list_btn.setOnClickListener(startgame);
+        startgame_btn = (Button)findViewById(R.id.StartGame_btn);
+        startgame_btn.setOnClickListener(startgame);
 
     }
 
