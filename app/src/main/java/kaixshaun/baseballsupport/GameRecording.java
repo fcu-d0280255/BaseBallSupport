@@ -29,23 +29,18 @@ public class GameRecording extends AppCompatActivity {
         awayteamid = intent.getStringExtra(Home_Team_Bench_List.AwayTeamID);
         hometeamid = intent.getStringExtra(Home_Team_Bench_List.HomeTeamID);
 
+        String atvtemp = null, atmvtemp = null, htvtemp = null, htmvtemp = null;
+        String [] names;
+
         Cursor awayteamname_c = db.selsectteam(awayteamid);
         awayteamname_c.moveToFirst();
-        Cursor hometeamname_c = db.selsectteam(hometeamid);
-        hometeamname_c.moveToFirst();
-        Cursor awayteamorder_c = db.selestorder(gameid,awayteamid);
-        awayteamorder_c.moveToFirst();
-        Cursor hometeamorder_c = db.selestorder(gameid,hometeamid);
-        hometeamorder_c.moveToFirst();
-        Cursor awayteammate_c = db.selectteamate(gameid,awayteamid);
-        awayteammate_c.moveToFirst();
-        Cursor hometeammate_c = db.selectteamate(gameid,hometeamid);
-        hometeammate_c.moveToFirst();
 
-        String atvtemp = null, atmvtemp = null, htvtemp = null, htmvtemp = null;
-        String [] names = awayteamname_c.getColumnNames();
+        names = awayteamname_c.getColumnNames();
 
         atvtemp = awayteamname_c.getString(awayteamname_c.getColumnIndex(names[2])) + "\n";
+
+        Cursor awayteamorder_c = db.selestorder(gameid,awayteamid);
+        awayteamorder_c.moveToFirst();
 
         names = awayteamorder_c.getColumnNames();
 
@@ -58,36 +53,50 @@ public class GameRecording extends AppCompatActivity {
         }
         atv.setText(atvtemp);
 
-        /*names = awayteammate_c.getColumnNames();
+        Cursor awayteammate_c = db.selectteamate(gameid,awayteamid);
+        awayteammate_c.moveToFirst();
+
+        names = awayteammate_c.getColumnNames();
 
         for(int i = 0; i < awayteammate_c.getCount(); i++){
 
-            atmvtemp = atvtemp + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[2])) + " "
-                    + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[3])) + "\n";
+            atmvtemp = atvtemp + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[3])) + " "
+                    + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[4])) + "\n";
+            awayteammate_c.moveToNext();
         }
         atmv.setText(atmvtemp);
 
+        /*Cursor hometeamname_c = db.selsectteam(hometeamid);
+        hometeamname_c.moveToFirst();
+
         names = hometeamname_c.getColumnNames();
 
-        htvtemp = hometeamname_c.getString(hometeamname_c.getColumnIndex(names[1])) + "\n";
+        htvtemp = hometeamname_c.getString(hometeamname_c.getColumnIndex(names[2])) + "\n";
+
+        Cursor hometeamorder_c = db.selestorder(gameid,hometeamid);
+        hometeamorder_c.moveToFirst();
 
         names = hometeamorder_c.getColumnNames();
 
         for(int i = 0 ; i < hometeamorder_c.getCount(); i++){
 
-            htvtemp = htvtemp + hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[3])) +" "
-                    +  hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[2])) +" "
-                    +  hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[4])) +"\n";
+            htvtemp = htvtemp + hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[4])) +" "
+                    +  hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[3])) +" "
+                    +  hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[5])) +"\n";
             hometeamorder_c.moveToNext();
         }
         htv.setText(htvtemp);
+
+        Cursor hometeammate_c = db.selectteamate(gameid,hometeamid);
+        hometeammate_c.moveToFirst();
 
         names = hometeammate_c.getColumnNames();
 
         for(int i = 0; i < hometeammate_c.getCount(); i++){
 
-            htmvtemp = htvtemp + hometeammate_c.getString(hometeammate_c.getColumnIndex(names[2])) + " "
-                    + hometeammate_c.getString(hometeammate_c.getColumnIndex(names[3])) + "\n";
+            htmvtemp = htvtemp + hometeammate_c.getString(hometeammate_c.getColumnIndex(names[3])) + " "
+                    + hometeammate_c.getString(hometeammate_c.getColumnIndex(names[4])) + "\n";
+            hometeammate_c.moveToNext();
         }
         htmv.setText(htmvtemp);*/
 
