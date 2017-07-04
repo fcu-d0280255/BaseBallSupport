@@ -32,7 +32,7 @@ public class GameRecording extends AppCompatActivity {
         String atvtemp = null, atmvtemp = null, htvtemp = null, htmvtemp = null;
         String [] names;
 
-        Cursor awayteamname_c = db.selsectteam(awayteamid);
+       /* Cursor awayteamname_c = db.selsectteam(awayteamid);
         awayteamname_c.moveToFirst();
 
         names = awayteamname_c.getColumnNames();
@@ -51,7 +51,7 @@ public class GameRecording extends AppCompatActivity {
                     +  awayteamorder_c.getString(awayteamorder_c.getColumnIndex(names[5])) +"\n";
             awayteamorder_c.moveToNext();
         }
-        atv.setText(atvtemp);
+        atv.setText(atvtemp);*/
 
         Cursor awayteammate_c = db.selectteamate(gameid,awayteamid);
         awayteammate_c.moveToFirst();
@@ -60,7 +60,7 @@ public class GameRecording extends AppCompatActivity {
 
         for(int i = 0; i < awayteammate_c.getCount(); i++){
 
-            atmvtemp = atvtemp + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[3])) + " "
+            atmvtemp = atmvtemp + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[3])) + "  "
                     + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[4])) + "\n";
             awayteammate_c.moveToNext();
         }

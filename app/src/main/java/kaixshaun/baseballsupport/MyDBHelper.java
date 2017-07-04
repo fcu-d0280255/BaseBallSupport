@@ -12,7 +12,7 @@ import android.util.Log;
 public class MyDBHelper extends SQLiteOpenHelper {
 
     private static final String DBName = "baseballsupport.db";
-    private static int VERSION = 8;
+    private static int VERSION = 9;
 
     public static final String CREATE_Game_TABLE = "CREATE TABLE IF NOT EXISTS Game (_id INTEGER PRIMARY KEY AUTOINCREMENT,GameID TEXT NOT NULL,GameName TEXT,HomeTeamID TEXT NOT NULL,AwayTeamID TEXT NOT NULL,HomeScore INTEGER,AwayScore INTEGER)";
     public static final String CREATE_Team_TABLE = "CREATE TABLE IF NOT EXISTS Team (_id INTEGER PRIMARY KEY AUTOINCREMENT,TeamID TEXT NOT NULL,TeamName TEXT)";

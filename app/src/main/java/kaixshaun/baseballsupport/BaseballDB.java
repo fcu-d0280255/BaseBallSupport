@@ -181,7 +181,7 @@ public class BaseballDB {
 
     public Cursor selectteamate(String gameid, String teamid){
 
-        Cursor c = db.rawQuery("select * from Teammate where GameID = '" + gameid + "' AND TeamID = '" + teamid + "'",null);
+        Cursor c = db.rawQuery("select * from Teammate where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' " ,null);
         return c;
     }
 

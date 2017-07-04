@@ -64,7 +64,6 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
                     Log.v("delete","successful");
                 else
                     Log.v("delete","fail");
-
             }
 
 
@@ -72,6 +71,7 @@ public class Key_The_Away_Team_List extends AppCompatActivity {
 
                 awayteamname = a_t_name.getText().toString();
                 awayteamid = db.insertAwayteamname(gameid, awayteamname);
+                Log.v("awayteamid==>>",awayteamid);
                 settingorder();
                 toast = Toast.makeText(Key_The_Away_Team_List.this,"以儲存名單",Toast.LENGTH_LONG);
             }

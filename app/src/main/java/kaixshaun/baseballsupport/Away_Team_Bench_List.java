@@ -28,6 +28,7 @@ public class Away_Team_Bench_List extends AppCompatActivity {
         declare();
         gameid = setgameid();
         awayteamid = setawayteamid();
+        Log.v("awayteamid==>>",awayteamid);
 
         db =new BaseballDB(this);
 
@@ -108,34 +109,69 @@ public class Away_Team_Bench_List extends AppCompatActivity {
     //儲存隊員名單到資料庫
     private void settingbench(){
 
-        if(!"".equals(a_t_b_1.getText().toString().trim()))
-            db.insertTeammate(gameid,awayteamid,turnback(a_t_b_1),"B");
-        if(!"".equals(a_t_b_2.getText().toString().trim()))
+        if(!"".equals(a_t_b_1.getText().toString().trim())) {
+
+            db.insertTeammate(gameid, awayteamid, turnback(a_t_b_1), "B");
+            Log.v("awayteambench==>","a_t_b_1.");
+        }
+
+        if(!"".equals(a_t_b_2.getText().toString().trim())){
+
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_2),"B");
-        if(!"".equals(a_t_b_3.getText().toString().trim()))
+            Log.v("awayteambench==>","a_t_b_2.");
+        }
+
+        if(!"".equals(a_t_b_3.getText().toString().trim())){
+
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_3),"B");
-        if(!"".equals(a_t_b_4.getText().toString().trim()))
+            Log.v("awayteambench==>","a_t_b_3.");
+        }
+
+        if(!"".equals(a_t_b_4.getText().toString().trim())){
+
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_4),"B");
-        if(!"".equals(a_t_b_5.getText().toString().trim()))
+            Log.v("awayteambench==>","a_t_b_4.");
+        }
+
+        if(!"".equals(a_t_b_5.getText().toString().trim())){
+
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_5),"B");
-        if(!"".equals(a_t_b_6.getText().toString().trim()))
+            Log.v("awayteambench==>","a_t_b_5.");
+        }
+
+        if(!"".equals(a_t_b_6.getText().toString().trim())){
+
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_6),"B");
-        if(!"".equals(a_t_b_7.getText().toString().trim()))
+            Log.v("awayteambench==>","a_t_b_6.");
+        }
+
+        if(!"".equals(a_t_b_7.getText().toString().trim())){
+
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_7),"B");
+            Log.v("awayteambench==>","a_t_b_7.");
+        }
+
         if(!"".equals(a_t_b_8.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_8),"B");
+
         if(!"".equals(a_t_b_9.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_9),"B");
+
         if(!"".equals(a_t_b_10.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_10),"B");
+
         if(!"".equals(a_t_b_11.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_11),"B");
+
         if(!"".equals(a_t_b_12.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_12),"B");
+
         if(!"".equals(a_t_b_13.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_13),"B");
+
         if(!"".equals(a_t_b_14.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_14),"B");
+
         if(!"".equals(a_t_b_15.getText().toString().trim()))
             db.insertTeammate(gameid,awayteamid,turnback(a_t_b_15),"B");
     }
