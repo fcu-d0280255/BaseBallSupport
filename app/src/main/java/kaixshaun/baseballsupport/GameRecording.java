@@ -9,8 +9,8 @@ import android.widget.TextView;
 public class GameRecording extends AppCompatActivity {
 
     BaseballDB db;
-    TextView atv,atmv,htv,htmv;
-    String gameid,awayteamid,hometeamid;
+    TextView atv, atmv, htv, htmv;
+    String gameid, awayteamid, hometeamid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +19,10 @@ public class GameRecording extends AppCompatActivity {
 
         db = new BaseballDB(this);
 
-        atv = (TextView)findViewById(R.id.awayteamview);
-        atmv = (TextView)findViewById(R.id.awayteamateview);
-        htv = (TextView)findViewById(R.id.hometeamview);
-        htmv = (TextView)findViewById(R.id.awayteamateview);
+        atv = (TextView) findViewById(R.id.awayteamview);
+        atmv = (TextView) findViewById(R.id.awayteamateview);
+        htv = (TextView) findViewById(R.id.hometeamview);
+        htmv = (TextView) findViewById(R.id.hometeamateview);
 
         Intent intent = getIntent();
         gameid = intent.getStringExtra(Home_Team_Bench_List.GameID);
@@ -30,35 +30,37 @@ public class GameRecording extends AppCompatActivity {
         hometeamid = intent.getStringExtra(Home_Team_Bench_List.HomeTeamID);
 
         String atvtemp = null, atmvtemp = null, htvtemp = null, htmvtemp = null;
-        String [] names;
+        String[] names;
 
-       /* Cursor awayteamname_c = db.selsectteam(awayteamid);
+        //印出先攻order
+        Cursor awayteamname_c = db.selsectteam(awayteamid);
         awayteamname_c.moveToFirst();
 
         names = awayteamname_c.getColumnNames();
 
         atvtemp = awayteamname_c.getString(awayteamname_c.getColumnIndex(names[2])) + "\n";
 
-        Cursor awayteamorder_c = db.selestorder(gameid,awayteamid);
+        Cursor awayteamorder_c = db.selestorder(gameid, awayteamid);
         awayteamorder_c.moveToFirst();
 
         names = awayteamorder_c.getColumnNames();
 
-        for(int i = 0 ; i < awayteamorder_c.getCount(); i++){
+        for (int i = 0; i < awayteamorder_c.getCount(); i++) {
 
-            atvtemp = atvtemp + awayteamorder_c.getString(awayteamorder_c.getColumnIndex(names[4])) +" "
-                    +  awayteamorder_c.getString(awayteamorder_c.getColumnIndex(names[3])) +" "
-                    +  awayteamorder_c.getString(awayteamorder_c.getColumnIndex(names[5])) +"\n";
+            atvtemp = atvtemp + awayteamorder_c.getString(awayteamorder_c.getColumnIndex(names[4])) + " "
+                    + awayteamorder_c.getString(awayteamorder_c.getColumnIndex(names[3])) + " "
+                    + awayteamorder_c.getString(awayteamorder_c.getColumnIndex(names[5])) + "\n";
             awayteamorder_c.moveToNext();
         }
-        atv.setText(atvtemp);*/
+        atv.setText(atvtemp);
 
-        Cursor awayteammate_c = db.selectteamate(gameid,awayteamid);
+        //印出先攻名單
+        Cursor awayteammate_c = db.selectteamate(gameid, awayteamid);
         awayteammate_c.moveToFirst();
 
         names = awayteammate_c.getColumnNames();
 
-        for(int i = 0; i < awayteammate_c.getCount(); i++){
+        for (int i = 0; i < awayteammate_c.getCount(); i++) {
 
             atmvtemp = atmvtemp + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[3])) + "  "
                     + awayteammate_c.getString(awayteammate_c.getColumnIndex(names[4])) + "\n";
@@ -66,40 +68,43 @@ public class GameRecording extends AppCompatActivity {
         }
         atmv.setText(atmvtemp);
 
-        /*Cursor hometeamname_c = db.selsectteam(hometeamid);
+        //印出後攻order
+        Cursor hometeamname_c = db.selsectteam(hometeamid);
         hometeamname_c.moveToFirst();
 
         names = hometeamname_c.getColumnNames();
 
         htvtemp = hometeamname_c.getString(hometeamname_c.getColumnIndex(names[2])) + "\n";
 
-        Cursor hometeamorder_c = db.selestorder(gameid,hometeamid);
+        Cursor hometeamorder_c = db.selestorder(gameid, hometeamid);
         hometeamorder_c.moveToFirst();
 
         names = hometeamorder_c.getColumnNames();
 
-        for(int i = 0 ; i < hometeamorder_c.getCount(); i++){
+        for (int i = 0; i < hometeamorder_c.getCount(); i++) {
 
-            htvtemp = htvtemp + hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[4])) +" "
-                    +  hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[3])) +" "
-                    +  hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[5])) +"\n";
+            htvtemp = htvtemp + hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[4])) + " "
+                    + hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[3])) + " "
+                    + hometeamorder_c.getString(hometeamorder_c.getColumnIndex(names[5])) + "\n";
             hometeamorder_c.moveToNext();
         }
         htv.setText(htvtemp);
 
-        Cursor hometeammate_c = db.selectteamate(gameid,hometeamid);
+        //印出後攻名單
+        Cursor hometeammate_c = db.selectteamate(gameid, hometeamid);
         hometeammate_c.moveToFirst();
 
         names = hometeammate_c.getColumnNames();
 
-        for(int i = 0; i < hometeammate_c.getCount(); i++){
+        for (int i = 0; i < hometeammate_c.getCount(); i++) {
 
-            htmvtemp = htvtemp + hometeammate_c.getString(hometeammate_c.getColumnIndex(names[3])) + " "
+            htmvtemp = htmvtemp + hometeammate_c.getString(hometeammate_c.getColumnIndex(names[3])) + " "
                     + hometeammate_c.getString(hometeammate_c.getColumnIndex(names[4])) + "\n";
             hometeammate_c.moveToNext();
+
+            htmv.setText(htmvtemp);
+
+
         }
-        htmv.setText(htmvtemp);*/
-
-
     }
 }

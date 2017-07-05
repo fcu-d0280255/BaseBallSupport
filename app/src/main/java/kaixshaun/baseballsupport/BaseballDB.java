@@ -146,6 +146,10 @@ public class BaseballDB {
         db.insert("Record", null, cv);
     }
 
+    //刪除比賽
+    //public boolean deletegame(String gameid)
+
+
     //刪除先發名單與隊名
     public boolean deleteStartingOrder(String gameid,String teamid){
 
@@ -160,12 +164,14 @@ public class BaseballDB {
         return test1*test2*test3 > 0;
     }
 
-    public boolean deleteStartingBenchOrder(String gameid,String teamid){
+    public boolean deleteBenchOrder(String gameid,String teamid){
 
 
         String teammate = "GameID = '" + gameid + "' AND TeamID =  '" + teamid + "' AND S_B = 'B' ";
         return db.delete("Teammate", teammate, null)>0;
     }
+
+
 
     public Cursor selsectteam(String teamid){
 

@@ -25,6 +25,7 @@ public class NewGameName extends AppCompatActivity {
         cancel = (Button)findViewById(R.id.cancel_btn);
         db = new BaseballDB(this);
         enter.setOnClickListener(goto_key_the_away_list);
+        cancel.setOnClickListener(cancelgame);
 
     }
 
@@ -52,6 +53,14 @@ public class NewGameName extends AppCompatActivity {
             }
             else
                 startActivity(intent);
+        }
+    };
+
+    private  View.OnClickListener cancelgame =new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            NewGameName.this.finish();
         }
     };
 }
