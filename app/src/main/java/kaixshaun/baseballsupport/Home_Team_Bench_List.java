@@ -46,7 +46,7 @@ public class Home_Team_Bench_List extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            db.deleteStartingBenchOrder(gameid,awayteamid);
+            db.deleteBenchOrder(gameid,hometeamid);
             settingbench();
             Toast toast = Toast.makeText(Home_Team_Bench_List.this, "成功儲存", Toast.LENGTH_LONG);
             toast.show();
