@@ -61,7 +61,7 @@ public class Home_Team_Bench_List extends AppCompatActivity {
             intent.putExtra(AwayTeamID, awayteamid);
             intent.putExtra(HomeTeamID, hometeamid);
             intent.putExtra(GameID, gameid);
-            intent.setClass(Home_Team_Bench_List.this,GameRecording.class);
+            intent.setClass(Home_Team_Bench_List.this,PlayRecording.class);
             startActivity(intent);
             Home_Team_Bench_List.this.finish();
         }

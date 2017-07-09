@@ -150,7 +150,7 @@ public class BaseballDB {
     //public boolean deletegame(String gameid)
 
 
-    //刪除先發名單與隊名
+     //刪除先發名單與隊名
     public boolean deleteStartingOrder(String gameid,String teamid){
 
         String battingorderwhere = "GameID = '" + gameid + "' AND TeamID =  '" + teamid + "'";
