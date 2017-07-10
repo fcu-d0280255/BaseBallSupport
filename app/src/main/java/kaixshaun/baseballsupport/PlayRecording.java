@@ -52,7 +52,7 @@ public class PlayRecording extends AppCompatActivity {
 
         back = awayteamback[awayteamno];
         rule = awayteamrule[awayteamno];
-        order = awayteamno;
+        order = awayteamno+1;
 
 
     }
@@ -183,7 +183,7 @@ public class PlayRecording extends AppCompatActivity {
         ArrayAdapter<String> flytolist = new ArrayAdapter<String>(PlayRecording.this, android.R.layout.simple_spinner_dropdown_item, flyto);
         FlytoView.setAdapter(flytolist);
 
-        final String[] onbase = {"無", "1", "2", "3", "全壘打"};
+        final String[] onbase = {"無", "保送", "1", "2", "3", "全壘打"};
         BaseView = (Spinner) findViewById(R.id.Base);
         ArrayAdapter<String> onbaselist = new ArrayAdapter<String>(PlayRecording.this, android.R.layout.simple_spinner_dropdown_item, onbase);
         BaseView.setAdapter(onbaselist);
@@ -226,6 +226,13 @@ public class PlayRecording extends AppCompatActivity {
                 situation = "D";
                 out = getspinnerint(KillView);
                 flyto = turnflyto(getspinnerstring(FlytoView));
+                rbi = getspinnerint(GetScoreView);
+
+            } else if(getspinnerstring(BaseView) == "保送"){
+
+                situation = "保送";
+                out = 0;
+                flyto = 0;
                 rbi = getspinnerint(GetScoreView);
 
             } else {        //  當打者"上壘"時的狀況設定
