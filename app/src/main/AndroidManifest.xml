@@ -21,7 +21,8 @@
         <activity android:name=".Away_Team_Bench_List" />
         <activity android:name=".Home_Team_Bench_List" />
         <activity android:name=".GameRecording" />
-        <activity android:name=".PlayRecording"></activity>
+        <activity android:name=".PlayRecording" />
+        <activity android:name=".GameFinalData"></activity>
     </application>
 
 </manifest>

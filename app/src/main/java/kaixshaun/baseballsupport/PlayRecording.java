@@ -14,11 +14,16 @@ import android.widget.Toast;
 
 public class PlayRecording extends AppCompatActivity {
 
+    public static final String HomeTeamID = "HomeTeamID";
+    public static final String AwayTeamID = "AwayTeamID";
+    public static final String GameID = "GameID";
+
     TextView InningView, OutView, ScoreView, BackView, RuleView, No_View;
     Spinner FlytoView, BaseView, B_EView, SituationView, DiedwayView, KillView, GetScoreView;
-    Button NextBtn, StoreBtn, FinishBtn;
+    Button NextBtn, FinishBtn;
 
     int inning, out, awayscore = 0, homescore = 0, back, rule, awayteamno = 0, hometeamno = 0, order, flyto, rbi, gameout = 0, inninghalf = 0;
+
     Cursor awayteamorder, hometeamorder;
     String showInning, gameid, awayteamid, hometeamid, teamid, situation;
     int[] awayteamback = new int[10], awayteamrule = new int[10], hometeamback = new int[10], hometeamrule = new int[10];
@@ -30,20 +35,20 @@ public class PlayRecording extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_recording);
 
-        declare();
-        db = new BaseballDB(this);
-        setid();
-        setorder();
+        declare();                                       //     宣告
+        db = new BaseballDB(this);                      //  創建DB
+        setid();                                        //  取得ID
+        setorder();                                     //  將DB裡的名單存進陣列
 
-        inning = inninghalf / 2 + 1;
-        teamid = awayteamid;
+        inning = inninghalf / 2 + 1;                    //  設定局數
+        teamid = awayteamid;                           //   設定teamid 存進DB時用
         showInning = inning + "上";
-        InningView.setText(showInning);
-        OutView.setText(gameout+"");
-        ScoreView.setText(awayscore + " - " + homescore);
-        BackView.setText(awayteamback[awayteamno]+"");
-        RuleView.setText(turnrule(awayteamrule[awayteamno]));
-        No_View.setText((awayteamno + 1)+"" );
+        InningView.setText(showInning);                              //     設定版面資訊
+        OutView.setText(gameout+"");                                 //
+        ScoreView.setText(awayscore + " - " + homescore);             //
+        BackView.setText(awayteamback[awayteamno]+"");             //
+        RuleView.setText(turnrule(awayteamrule[awayteamno]));       //
+        No_View.setText((awayteamno + 1)+"" );                      //
 
         back = awayteamback[awayteamno];
         rule = awayteamrule[awayteamno];
@@ -52,6 +57,7 @@ public class PlayRecording extends AppCompatActivity {
 
     }
 
+    //將DB裡的守位轉換成字串中文
     public String turnrule(int temp){
 
         switch (temp) {
@@ -81,6 +87,7 @@ public class PlayRecording extends AppCompatActivity {
         }
     }
 
+    //將落點轉成整數型態存入DB
     public int turnflyto(String temp) {
 
         switch (temp) {
@@ -110,11 +117,13 @@ public class PlayRecording extends AppCompatActivity {
         }
     }
 
+    //從spinner取得字串
     private String getspinnerstring(Spinner temp) {
 
         return temp.getSelectedItem().toString();
     }
 
+    //從spinner取得整數
     private int getspinnerint(Spinner temp) {
 
         return Integer.parseInt(temp.getSelectedItem().toString());
@@ -131,7 +140,9 @@ public class PlayRecording extends AppCompatActivity {
     private void setorder() {
 
         awayteamorder = db.selestorder(gameid, awayteamid);
-        hometeamorder = db.selestorder(gameid, awayteamid);
+        hometeamorder = db.selestorder(gameid, hometeamid);
+
+
         awayteamorder.moveToFirst();
         names = awayteamorder.getColumnNames();
         for (int i = 0; i < awayteamorder.getCount(); i++) {
@@ -140,6 +151,7 @@ public class PlayRecording extends AppCompatActivity {
             awayteamrule[i] = awayteamorder.getInt(awayteamorder.getColumnIndex(names[5]));
             awayteamorder.moveToNext();
         }
+
 
         hometeamorder.moveToFirst();
         names = hometeamorder.getColumnNames();
@@ -199,8 +211,6 @@ public class PlayRecording extends AppCompatActivity {
         NextBtn = (Button) findViewById(R.id.Next);
         NextBtn.setOnClickListener(nextmember);
 
-        StoreBtn = (Button) findViewById(R.id.Store);
-        StoreBtn.setOnClickListener(storerecording);
 
         FinishBtn = (Button) findViewById(R.id.Finish);
         FinishBtn.setOnClickListener(finishgame);
@@ -210,12 +220,49 @@ public class PlayRecording extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            if (inninghalf % 2 == 0) {
+            //儲存進DB時打擊狀況設定
+            if (getspinnerstring(DiedwayView) != "無") {         //  當打者上壘"沒上壘"時的狀況設定
 
-                awayteamno++;
-                if (awayteamno >= 10) {
+                situation = "D";
+                out = getspinnerint(KillView);
+                flyto = turnflyto(getspinnerstring(FlytoView));
+                rbi = getspinnerint(GetScoreView);
+
+            } else {        //  當打者"上壘"時的狀況設定
+
+                situation = getspinnerstring(BaseView) + getspinnerstring(B_EView);
+                out = getspinnerint(KillView);
+                if (getspinnerstring(BaseView) != "全壘打")
+                    flyto = turnflyto(getspinnerstring(FlytoView));
+                else
+                    flyto = 0;
+                rbi = getspinnerint(GetScoreView);
+            }
+
+            //  將打擊紀錄存進DB
+            db.insertRecord(gameid, teamid, back, inning, 0, order, situation, flyto, out, rbi, "");
+
+            //  紀錄半局的出局數
+            gameout = gameout + getspinnerint(KillView);
+
+            //  當出局數為3時轉換半局
+            if (gameout >= 3) {
+
+                inninghalf++;
+                gameout = 0;
+                rbi = 0;
+            }
+
+            //  判斷上下半局
+            if (inninghalf % 2 == 0) {  //  上半局
+
+                awayscore = awayscore + rbi;    //  計算分數
+                awayteamno++;   //  下位打者
+
+                if (awayteamno >= 10) { //  當棒次超過10換回第一棒
                     awayteamno = 0;
                 }
+
                 teamid = awayteamid;
                 inning = inninghalf/2+1;
                 showInning = inning + " 上";
@@ -230,8 +277,9 @@ public class PlayRecording extends AppCompatActivity {
                 rule = awayteamrule[awayteamno];
                 order = awayteamno + 1;
 
-            } else {
+            } else {    //  下半局
 
+                homescore = homescore + rbi;
                 if (hometeamno >= 10) {
                     hometeamno = 0;
                 }
@@ -250,50 +298,22 @@ public class PlayRecording extends AppCompatActivity {
                 order = hometeamno + 1;
                 hometeamno++;
             }
-
         }
 
     };
 
-    private View.OnClickListener storerecording = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                if (getspinnerstring(DiedwayView) != "無") {
+    private View.OnClickListener finishgame = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
-                    situation = "D";
-                    out = getspinnerint(KillView);
-                    flyto = turnflyto(getspinnerstring(FlytoView));
-                    rbi = getspinnerint(GetScoreView);
-
-                } else {
-
-                    situation = getspinnerstring(BaseView) + getspinnerstring(B_EView);
-                    out = getspinnerint(KillView);
-                    if (getspinnerstring(BaseView) != "全壘打")
-                        flyto = turnflyto(getspinnerstring(FlytoView));
-                    else
-                        flyto = 0;
-                    rbi = getspinnerint(GetScoreView);
-                }
-                db.insertRecord(gameid, teamid, back, inning, 0, order, situation, flyto, out, rbi, "");
-
-                gameout = gameout + getspinnerint(KillView);
-
-                if (gameout >= 3) {
-
-                    inninghalf++;
-                    gameout = 0;
-                }
-
-            }
-        };
-
-        private View.OnClickListener finishgame = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        };
-    }
+            Intent intent = new Intent();
+            intent.putExtra(AwayTeamID, awayteamid);
+            intent.putExtra(HomeTeamID, hometeamid);
+            intent.putExtra(GameID, gameid);
+            intent.setClass(PlayRecording.this,GameFinalData.class);
+            startActivity(intent);
+            PlayRecording.this.finish();
+        }
+    };
+}
