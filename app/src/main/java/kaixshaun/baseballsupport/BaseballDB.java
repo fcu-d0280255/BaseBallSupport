@@ -264,4 +264,10 @@ public class BaseballDB {
         return c;
     }
 
+    public Cursor selectteamname(){
+
+        Cursor c = db.rawQuery("select TeamName from Team" ,null);
+        return c;
+    }
+
 }
