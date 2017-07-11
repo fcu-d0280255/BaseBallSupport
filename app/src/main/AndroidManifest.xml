@@ -22,7 +22,8 @@
         <activity android:name=".Home_Team_Bench_List" />
         <activity android:name=".GameRecording" />
         <activity android:name=".PlayRecording" />
-        <activity android:name=".GameFinalData"></activity>
+        <activity android:name=".GameFinalData" />
+        <activity android:name=".ShowGameList"></activity>
     </application>
 
 </manifest>

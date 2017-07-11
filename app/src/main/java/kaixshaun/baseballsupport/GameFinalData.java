@@ -74,7 +74,7 @@ public class GameFinalData extends AppCompatActivity {
                     c.getInt(c.getColumnIndex(names[9])) + "  保送: " +
                     c.getInt(c.getColumnIndex(names[10])) + "  失誤: " +
                     c.getInt(c.getColumnIndex(names[11])) + " 次  打點: " +
-                    c.getInt(c.getColumnIndex(names[2])) + " 分\n";
+                    c.getInt(c.getColumnIndex(names[12])) + " 分\n";
             c.moveToNext();
         }
         show.setText(temp);
@@ -125,7 +125,7 @@ public class GameFinalData extends AppCompatActivity {
 
             for (int j = 0; j < tempc.getCount(); j++) {
 
-                rbi = rbi + tempc.getInt(tempc.getColumnIndex(tempnames[10]));
+                rbi = rbi + tempc.getInt(tempc.getColumnIndex(tempnames[0]));
                 tempc.moveToNext();
             }
 
