@@ -51,8 +51,10 @@ public class NewGameName extends AppCompatActivity {
                 Toast toast = Toast.makeText(NewGameName.this,"請輸入比賽名稱",Toast.LENGTH_LONG);
                 toast.show();
             }
-            else
+            else {
                 startActivity(intent);
+                NewGameName.this.finish();
+            }
         }
     };
 

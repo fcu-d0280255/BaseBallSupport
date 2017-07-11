@@ -258,6 +258,12 @@ public class BaseballDB {
         return c;
     }
 
+    public Cursor selectfinalrecord(String gameid, String teamid, int back){
+
+        Cursor c = db.rawQuery("select * from FinalData where GameID = '" + gameid + "' AND TeamID = '" + teamid + "'AND Back ='" + back +"'" ,null);
+        return c;
+    }
+
     public Cursor selectgame(){
 
         Cursor c = db.rawQuery("select GameName from Game" ,null);
@@ -267,6 +273,18 @@ public class BaseballDB {
     public Cursor selectteamname(){
 
         Cursor c = db.rawQuery("select TeamName from Team" ,null);
+        return c;
+    }
+
+    public Cursor selectteamid(String teamname){
+
+        Cursor c = db.rawQuery("select TeamID from Team where TeamName = '" + teamname + "'" ,null);
+        return  c;
+    }
+
+    public Cursor selectgameid(String teamid){
+
+        Cursor c = db.rawQuery("select GameID from Game where HomeTeamID = '" + teamid +"' OR AwayTeamID = '" + teamid +"'" ,null);
         return c;
     }
 

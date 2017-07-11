@@ -1,5 +1,6 @@
 package kaixshaun.baseballsupport;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +15,12 @@ import java.util.Set;
 
 public class ShowGameList extends AppCompatActivity {
 
+    public static final String Choice = "Choice";
     ListView listView;
     String[] templist,list,names;
     ArrayAdapter<String> listAdapter;
     BaseballDB db;
+    String choice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,12 @@ public class ShowGameList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                choice = list[position];
+                Intent intent = new Intent();
+                intent.putExtra(Choice,choice);
+                intent.setClass(ShowGameList.this,ShowRecommandList.class);
+                startActivity(intent);
+                ShowGameList.this.finish();
             }
         });
     }

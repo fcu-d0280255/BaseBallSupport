@@ -23,7 +23,8 @@
         <activity android:name=".GameRecording" />
         <activity android:name=".PlayRecording" />
         <activity android:name=".GameFinalData" />
-        <activity android:name=".ShowGameList"></activity>
+        <activity android:name=".ShowGameList" />
+        <activity android:name=".ShowRecommandList"></activity>
     </application>
 
 </manifest>
