@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,7 +26,7 @@ public class PlayRecording extends AppCompatActivity {
     int inning, out, awayscore = 0, homescore = 0, back, rule, awayteamno = 0, hometeamno = 0, order, flyto, rbi, gameout = 0, inninghalf = 0;
 
     Cursor awayteamorder, hometeamorder;
-    String showInning, gameid, awayteamid, hometeamid, teamid, situation;
+    String showInning, gameid, awayteamid, hometeamid, teamid, situation,base;
     int[] awayteamback = new int[10], awayteamrule = new int[10], hometeamback = new int[10], hometeamrule = new int[10];
     String[] names;
     BaseballDB db;
@@ -132,9 +133,9 @@ public class PlayRecording extends AppCompatActivity {
     private void setid() {
 
         Intent intent = getIntent();
-        gameid = intent.getStringExtra(Home_Team_Bench_List.GameID);
-        awayteamid = intent.getStringExtra(Home_Team_Bench_List.AwayTeamID);
-        hometeamid = intent.getStringExtra(Home_Team_Bench_List.HomeTeamID);
+        gameid = intent.getStringExtra(Key_The_Home_Team_List.GameID);
+        awayteamid = intent.getStringExtra(Key_The_Home_Team_List.AwayTeamID);
+        hometeamid = intent.getStringExtra(Key_The_Home_Team_List.HomeTeamID);
     }
 
     private void setorder() {
@@ -149,6 +150,7 @@ public class PlayRecording extends AppCompatActivity {
 
             awayteamback[i] = awayteamorder.getInt(awayteamorder.getColumnIndex(names[3]));
             awayteamrule[i] = awayteamorder.getInt(awayteamorder.getColumnIndex(names[5]));
+            Log.v ("awayteamback"+i+"=>",awayteamorder.getInt(awayteamorder.getColumnIndex(names[4]))+"");
             awayteamorder.moveToNext();
         }
 
@@ -159,6 +161,7 @@ public class PlayRecording extends AppCompatActivity {
 
             hometeamback[i] = hometeamorder.getInt(hometeamorder.getColumnIndex(names[3]));
             hometeamrule[i] = hometeamorder.getInt(hometeamorder.getColumnIndex(names[5]));
+            Log.v ("hometeamback"+i+"=>",hometeamorder.getInt(hometeamorder.getColumnIndex(names[4]))+"");
             hometeamorder.moveToNext();
         }
     }
@@ -223,13 +226,16 @@ public class PlayRecording extends AppCompatActivity {
             //儲存進DB時打擊狀況設定
             if (getspinnerstring(DiedwayView) != "無") {         //  當打者上壘"沒上壘"時的狀況設定
 
+                base = "無";
                 situation = "D";
+
                 out = getspinnerint(KillView);
                 flyto = turnflyto(getspinnerstring(FlytoView));
                 rbi = getspinnerint(GetScoreView);
 
             } else if(getspinnerstring(BaseView) == "保送"){
 
+                base = "無";
                 situation = "保送";
                 out = 0;
                 flyto = 0;
@@ -237,7 +243,8 @@ public class PlayRecording extends AppCompatActivity {
 
             } else {        //  當打者"上壘"時的狀況設定
 
-                situation = getspinnerstring(BaseView) + getspinnerstring(B_EView);
+                base = getspinnerstring(BaseView);
+                situation = getspinnerstring(B_EView);
                 out = getspinnerint(KillView);
                 if (getspinnerstring(BaseView) != "全壘打")
                     flyto = turnflyto(getspinnerstring(FlytoView));
@@ -247,7 +254,7 @@ public class PlayRecording extends AppCompatActivity {
             }
 
             //  將打擊紀錄存進DB
-            db.insertRecord(gameid, teamid, back, inning, 0, order, situation, flyto, out, rbi, "");
+            db.insertRecord(gameid, teamid, back, inning, 0, order, base, situation, flyto, out, rbi, "");
 
             //  紀錄半局的出局數
             gameout = gameout + getspinnerint(KillView);

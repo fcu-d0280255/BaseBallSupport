@@ -129,7 +129,7 @@ public class BaseballDB {
     }
 
     //輸入打擊紀錄
-    public void insertRecord(String gameid, String teamid, int back, int inning, int round, int order, String situation, int flyto, int out, int rbi,String notes){
+    public void insertRecord(String gameid, String teamid, int back, int inning, int round, int order, String base, String situation, int flyto, int out, int rbi,String notes){
 
         ContentValues cv = new ContentValues();
         cv.put("GameID", gameid);
@@ -138,6 +138,7 @@ public class BaseballDB {
         cv.put("Inning", inning);
         cv.put("Round", round);
         cv.put("_No", order);
+        cv.put("Base", base);
         cv.put("Situation", situation);
         cv.put("Flyto", flyto);
         cv.put("Out", out);
@@ -223,31 +224,37 @@ public class BaseballDB {
 
     public Cursor selecthit(String gameid, String teamid, int back){
 
-        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' OR Situation = '1B' OR Situation = '2B' OR Situation = '3B' OR Situation = '全壘打'" ,null);
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = 'B'" ,null);
         return c;
     }
 
-    public Cursor selectonbase(String gameid, String teamid, int back){
+    public Cursor selectdied(String gameid, String teamid, int back){
 
-        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' OR Situation = '1B' OR Situation = '2B' OR Situation = '3B' OR Situation = '全壘打' OR Situation = '1E' OR Situation = '2E' OR Situation = '3E' OR Situation = '保送'" ,null);
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = 'D' " ,null);
         return c;
     }
 
     public Cursor selectwalk(String gameid, String teamid, int back){
 
-        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' OR Situation = '保送'" ,null);
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = '保送'" ,null);
         return c;
     }
 
     public Cursor selecterror(String gameid, String teamid, int back){
 
-        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' OR Situation = '1E' OR Situation = '2E' OR Situation = '3E'" ,null);
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = 'E'" ,null);
         return c;
     }
 
     public Cursor selectrbi(String gameid, String teamid, int back){
 
-        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND RBI > 0" ,null);
+        Cursor c = db.rawQuery("select RBI from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND RBI > 0" ,null);
+        return c;
+    }
+
+    public Cursor selectfinalrecord(String gameid, String teamid){
+
+        Cursor c = db.rawQuery("select * from FinalData where GameID = '" + gameid + "' AND TeamID = '" + teamid + "'" ,null);
         return c;
     }
 

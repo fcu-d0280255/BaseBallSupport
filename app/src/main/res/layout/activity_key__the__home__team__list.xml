@@ -411,37 +411,6 @@
 
                 </TableRow>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="11"
-                        android:textAlignment="center"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/home_team_back_number_11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="2"
-                        android:inputType="number"
-                        android:textSize="20sp" />
-
-                    <Spinner
-                        android:id="@+id/home_team_defense_location_11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                </TableRow>
             </LinearLayout>
         </LinearLayout>
 
@@ -459,11 +428,11 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/key_the_home_team_bench_list_btn"
+                android:id="@+id/startgame_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="填寫候補名單"
+                android:text="比賽開始"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 

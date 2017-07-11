@@ -21,11 +21,11 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
 
     //後攻方守位變數
     EditText h_t_b_n_1, h_t_b_n_2, h_t_b_n_3, h_t_b_n_4, h_t_b_n_5, h_t_b_n_6;
-    EditText h_t_b_n_7, h_t_b_n_8, h_t_b_n_9, h_t_b_n_10, h_t_b_n_11, h_t_name;
+    EditText h_t_b_n_7, h_t_b_n_8, h_t_b_n_9, h_t_b_n_10, h_t_name;
     Spinner h_t_d_l_1, h_t_d_l_2, h_t_d_l_3, h_t_d_l_4, h_t_d_l_5, h_t_d_l_6;
-    Spinner h_t_d_l_7, h_t_d_l_8, h_t_d_l_9, h_t_d_l_10, h_t_d_l_11;
+    Spinner h_t_d_l_7, h_t_d_l_8, h_t_d_l_9, h_t_d_l_10;
 
-    Button key_h_t_bench_l, store_t_h_t_l;
+    Button startgame, store_t_h_t_l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +42,15 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         declare();
 
         //跳去輸入後攻候補名單功能
-        key_h_t_bench_l = (Button) findViewById(R.id.key_the_home_team_bench_list_btn);
-        key_h_t_bench_l.setOnClickListener(goto_key_the_home_team_bench_list);
+        startgame = (Button) findViewById(R.id.startgame_btn);
+        startgame.setOnClickListener(StartGame);
 
         //儲存儲存先發名單
         store_t_h_t_l =(Button)findViewById(R.id.store_the_home_team_list_btn);
         store_t_h_t_l.setOnClickListener(store_the_home_team_list);
     }
 
-    private View.OnClickListener goto_key_the_home_team_bench_list = new View.OnClickListener() {
+    private View.OnClickListener StartGame = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
@@ -59,7 +59,7 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
             intent.putExtra(AwayTeamID, awayteamid);
             intent.putExtra(HomeTeamID, hometeamid);
             intent.putExtra(GameID, gameid);
-            intent.setClass(Key_The_Home_Team_List.this, Home_Team_Bench_List.class);
+            intent.setClass(Key_The_Home_Team_List.this, PlayRecording.class);
             if (judgment()) {
 
                 Toast toast = Toast.makeText(Key_The_Home_Team_List.this, "請填好名單並儲存!!", Toast.LENGTH_LONG);
@@ -106,30 +106,17 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
 
         switch (rule) {
 
-            case "投手":
-                return 1;
-            case "捕手":
-                return 2;
-            case "一壘手":
-                return 3;
-            case "二壘手":
-                return 4;
-            case "三壘手":
-                return 5;
-            case "游擊手":
-                return 6;
-            case "左外野手":
-                return 7;
-            case "中外野手":
-                return 8;
-            case "右外野手":
-                return 9;
-            case "自由手":
-                return 10;
-            case "指名打擊":
-                return 11;
-            default:
-                return 0;
+            case "投手":return 1;
+            case "捕手":return 2;
+            case "一壘手":return 3;
+            case "二壘手":return 4;
+            case "三壘手":return 5;
+            case "游擊手":return 6;
+            case "左外野手":return 7;
+            case "中外野手":return 8;
+            case "右外野手":return 9;
+            case "自由手":return 10;
+            default:return 0;
         }
     }
 
@@ -137,7 +124,7 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
     private String setgameid() {
 
         Intent intent = getIntent();
-        String temp = intent.getStringExtra(Away_Team_Bench_List.GameID);
+        String temp = intent.getStringExtra(Key_The_Away_Team_List.GameID);
         return temp;
     }
 
@@ -165,30 +152,24 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
 
         db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_1),1,getrule(h_t_d_l_1));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_1),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_2), 2,getrule(h_t_d_l_2));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_2),2,getrule(h_t_d_l_2));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_2),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_3), 3,getrule(h_t_d_l_3));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_3),3,getrule(h_t_d_l_3));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_3),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_4), 4,getrule(h_t_d_l_4));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_4),4,getrule(h_t_d_l_4));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_4),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_5), 5,getrule(h_t_d_l_5));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_5),5,getrule(h_t_d_l_5));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_5),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_6), 6,getrule(h_t_d_l_6));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_6),6,getrule(h_t_d_l_6));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_6),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_7), 7,getrule(h_t_d_l_7));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_7),7,getrule(h_t_d_l_7));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_7),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_8), 8,getrule(h_t_d_l_8));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_8),8,getrule(h_t_d_l_8));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_8),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_9), 9,getrule(h_t_d_l_9));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_9),9,getrule(h_t_d_l_9));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_9),"S");
-        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_10), 10,getrule(h_t_d_l_10));
+        db.insertBattingorder(gameid,hometeamid,turnback(h_t_b_n_10),10,getrule(h_t_d_l_10));
         db.insertTeammate(gameid,hometeamid,turnback(h_t_b_n_10),"S");
-
-        if(getrule(h_t_d_l_11) != 0&&!"".equals(h_t_name.getText().toString().trim())) {
-
-            db.insertBattingorder(gameid, hometeamid, turnback(h_t_b_n_11), 11, getrule(h_t_d_l_11));
-            db.insertTeammate(gameid, hometeamid,turnback(h_t_b_n_11),"S");
-        }
 
     }
 
@@ -213,9 +194,8 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         h_t_b_n_8 = (EditText) findViewById(R.id.home_team_back_number_8);
         h_t_b_n_9 = (EditText) findViewById(R.id.home_team_back_number_9);
         h_t_b_n_10 = (EditText) findViewById(R.id.home_team_back_number_10);
-        h_t_b_n_11 = (EditText) findViewById(R.id.home_team_back_number_11);
 
-        final String[] defense = {"無","投手","捕手","一壘手","二壘手","三壘手","游擊手","左外野手","中外野手","右外野手","自由手","指名打擊"};
+        final String[] defense = {"投手","捕手","一壘手","二壘手","三壘手","游擊手","左外野手","中外野手","右外野手","自由手"};
         h_t_d_l_1 = (Spinner) findViewById(R.id.home_team_defense_location_1);
         h_t_d_l_2 = (Spinner) findViewById(R.id.home_team_defense_location_2);
         h_t_d_l_3 = (Spinner) findViewById(R.id.home_team_defense_location_3);
@@ -226,7 +206,6 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         h_t_d_l_8 = (Spinner) findViewById(R.id.home_team_defense_location_8);
         h_t_d_l_9 = (Spinner) findViewById(R.id.home_team_defense_location_9);
         h_t_d_l_10 = (Spinner) findViewById(R.id.home_team_defense_location_10);
-        h_t_d_l_11 = (Spinner) findViewById(R.id.home_team_defense_location_11);
         ArrayAdapter<String> defenselist = new ArrayAdapter<String>(Key_The_Home_Team_List.this, android.R.layout.simple_spinner_dropdown_item, defense);
         h_t_d_l_1.setAdapter(defenselist);
         h_t_d_l_2.setAdapter(defenselist);
@@ -238,7 +217,6 @@ public class Key_The_Home_Team_List extends AppCompatActivity {
         h_t_d_l_8.setAdapter(defenselist);
         h_t_d_l_9.setAdapter(defenselist);
         h_t_d_l_10.setAdapter(defenselist);
-        h_t_d_l_11.setAdapter(defenselist);
     }
 }
 

@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:text="載入球局"
+                    android:text="推薦名單"
                     android:textAlignment="center" />
             </LinearLayout>
 
