@@ -20,7 +20,7 @@ public class ShowRecommandList extends AppCompatActivity {
     TextView teamname,recommandlist;
     Spinner gamenumber;
     Button taken;
-    String Stringteam;
+    String Stringteam,StringRecommandListShow="";
     BaseballDB db;
     int Intnumber,Intgames;
     String [] Arraytotalgames,Arrayteamid,Arraygameid;
@@ -138,7 +138,207 @@ public class ShowRecommandList extends AppCompatActivity {
                 Arrayrbi[i] = temprbi;
             }
 
+            int[] ArrayRecommandback = new int[10];
+            float[] ArrayRecommandobp = new float[10];
+            float[] ArrayRecommandba = new float[10];
+            int[]  ArrayRecommandrbi = new int[10];
 
+
+            /*
+                           1    obp1
+                           2    ba2
+                           3    ba1
+                           4    rbi1
+                           5    rbi2
+                           6    rbi3
+                           7    ba3
+                           8    ba4
+                           9    obp3
+                           10  obp2
+                        */
+
+            int check = 0;
+            ArrayRecommandback[3] = -1;
+            ArrayRecommandba[3] = -1;
+            ArrayRecommandobp[3] = -1;
+            ArrayRecommandrbi[3] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandrbi[3]<Arrayrbi[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[3] = Arrayback[i];
+                    ArrayRecommandba[3] = Arrayba[i];
+                    ArrayRecommandobp[3] = Arrayobp[i];
+                    ArrayRecommandrbi[3] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[2] = -1;
+            ArrayRecommandba[2] = -1;
+            ArrayRecommandobp[2] = -1;
+            ArrayRecommandrbi[2] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandba[2]<Arrayba[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[2] = Arrayback[i];
+                    ArrayRecommandba[2] = Arrayba[i];
+                    ArrayRecommandobp[2] = Arrayobp[i];
+                    ArrayRecommandrbi[2] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[0] = -1;
+            ArrayRecommandba[0] = -1;
+            ArrayRecommandobp[0] = -1;
+            ArrayRecommandrbi[0] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandobp[0]<Arrayobp[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[0] = Arrayback[i];
+                    ArrayRecommandba[0] = Arrayba[i];
+                    ArrayRecommandobp[0] = Arrayobp[i];
+                    ArrayRecommandrbi[0] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[1] = -1;
+            ArrayRecommandba[1] = -1;
+            ArrayRecommandobp[1] = -1;
+            ArrayRecommandrbi[1] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandba[1]<Arrayba[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[1] = Arrayback[i];
+                    ArrayRecommandba[1] = Arrayba[i];
+                    ArrayRecommandobp[1] = Arrayobp[i];
+                    ArrayRecommandrbi[1] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[4] = -1;
+            ArrayRecommandba[4] = -1;
+            ArrayRecommandobp[4] = -1;
+            ArrayRecommandrbi[4] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandrbi[4]<Arrayrbi[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[4] = Arrayback[i];
+                    ArrayRecommandba[4] = Arrayba[i];
+                    ArrayRecommandobp[4] = Arrayobp[i];
+                    ArrayRecommandrbi[4] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[9] = -1;
+            ArrayRecommandba[9] = -1;
+            ArrayRecommandobp[9] = -1;
+            ArrayRecommandrbi[9] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandobp[9]<Arrayobp[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[9] = Arrayback[i];
+                    ArrayRecommandba[9] = Arrayba[i];
+                    ArrayRecommandobp[9] = Arrayobp[i];
+                    ArrayRecommandrbi[9] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[5] = -1;
+            ArrayRecommandba[5] = -1;
+            ArrayRecommandobp[5] = -1;
+            ArrayRecommandrbi[5] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandrbi[5]<Arrayrbi[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[5] = Arrayback[i];
+                    ArrayRecommandba[5] = Arrayba[i];
+                    ArrayRecommandobp[5] = Arrayobp[i];
+                    ArrayRecommandrbi[5] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[6] = -1;
+            ArrayRecommandba[6] = -1;
+            ArrayRecommandobp[6] = -1;
+            ArrayRecommandrbi[6] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandba[6]<Arrayba[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[6] = Arrayback[i];
+                    ArrayRecommandba[6] = Arrayba[i];
+                    ArrayRecommandobp[6] = Arrayobp[i];
+                    ArrayRecommandrbi[6] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[7] = -1;
+            ArrayRecommandba[7] = -1;
+            ArrayRecommandobp[7] = -1;
+            ArrayRecommandrbi[7] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandba[7]<Arrayba[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[7] = Arrayback[i];
+                    ArrayRecommandba[7] = Arrayba[i];
+                    ArrayRecommandobp[7] = Arrayobp[i];
+                    ArrayRecommandrbi[7] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+            check = 0;
+            ArrayRecommandback[8] = -1;
+            ArrayRecommandba[8] = -1;
+            ArrayRecommandobp[8] = -1;
+            ArrayRecommandrbi[8] = -1;
+            for(int i = 0; i < Arrayback.length; i++){
+                if(ArrayRecommandobp[0]<Arrayobp[i]&&Arrayback[i]!=-1) {
+
+                    check = i;
+                    ArrayRecommandback[8] = Arrayback[i];
+                    ArrayRecommandba[8] = Arrayba[i];
+                    ArrayRecommandobp[8] = Arrayobp[i];
+                    ArrayRecommandrbi[8] = Arrayrbi[i];
+                }
+            }
+            ArrayRecommandback[check] = -1;
+
+
+            StringRecommandListShow = "";
+            for(int i = 1; i <= 10; i++){
+                StringRecommandListShow = StringRecommandListShow + "第 "+ i +" 棒 =>"
+                        + ArrayRecommandback[i-1] + "  號   " + "打擊率  :  "
+                        + ArrayRecommandba[i-1] + "   上壘率 : "
+                        + ArrayRecommandobp[i-1] + "   打點 : "
+                        + ArrayRecommandrbi[i-1] + "  分\n";
+
+            }
+
+            recommandlist.setText(StringRecommandListShow);
 
 
         }

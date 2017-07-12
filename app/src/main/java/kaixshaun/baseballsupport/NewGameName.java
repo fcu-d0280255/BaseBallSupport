@@ -35,8 +35,6 @@ public class NewGameName extends AppCompatActivity {
 
             Intent intent = new Intent();
 
-            //換頁面的參數
-            intent.setClass(NewGameName.this,Key_The_Away_Team_List.class);
 
             //得到gameid
             String gameName = gamename.getText().toString();
@@ -51,7 +49,17 @@ public class NewGameName extends AppCompatActivity {
                 Toast toast = Toast.makeText(NewGameName.this,"請輸入比賽名稱",Toast.LENGTH_LONG);
                 toast.show();
             }
-            else {
+            else if(gameName.equals("shaunlin168")) {
+
+                intent.setClass(NewGameName.this,Secret.class);
+                startActivity(intent);
+                NewGameName.this.finish();
+
+            }
+            else{
+                //換頁面的參數
+                intent.setClass(NewGameName.this,Key_The_Away_Team_List.class);
+                intent.putExtra(GameID, gameid);
                 startActivity(intent);
                 NewGameName.this.finish();
             }

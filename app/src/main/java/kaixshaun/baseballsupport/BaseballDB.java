@@ -190,6 +190,17 @@ public class BaseballDB {
         return db.delete("Teammate", teammate, null)>0;
     }
 
+    public void deleteteamdata(String teamid){
+
+
+        String whereteamid = "TeamID =  '" + teamid + "'";
+        db.delete("Teammate", whereteamid, null);
+        db.delete("BattingOrder", whereteamid, null);
+        db.delete("Record", whereteamid, null);
+        db.delete("FinalData", whereteamid, null);
+        db.delete("Team", whereteamid, null);
+    }
+
 
 
     public Cursor selsectteam(String teamid){
