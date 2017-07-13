@@ -239,9 +239,14 @@ public class BaseballDB {
         return c;
     }
 
-    public Cursor selectdied(String gameid, String teamid, int back){
+    public Cursor selectdiedK(String gameid, String teamid, int back){
 
-        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = 'D' " ,null);
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = 'K'" ,null);
+        return c;
+    }
+    public Cursor selectdiedD(String gameid, String teamid, int back){
+
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = 'D'" ,null);
         return c;
     }
 
@@ -251,9 +256,9 @@ public class BaseballDB {
         return c;
     }
 
-    public Cursor selecterror(String gameid, String teamid, int back){
+    public Cursor selecterror(String gameid, String teamid, int flyto){
 
-        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back ='" + back +"' AND Situation = 'E'" ,null);
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Flyto ='" + flyto +"' AND Situation = 'E'" ,null);
         return c;
     }
 
@@ -284,6 +289,12 @@ public class BaseballDB {
     public Cursor selectteamname(){
 
         Cursor c = db.rawQuery("select TeamName from Team" ,null);
+        return c;
+    }
+
+    public Cursor selectteamname(String teamid){
+
+        Cursor c = db.rawQuery("select TeamName from Team where TeamID = '" + teamid + "'" ,null);
         return c;
     }
 

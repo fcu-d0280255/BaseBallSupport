@@ -157,13 +157,17 @@ public class ShowRecommandList extends AppCompatActivity {
                            10  obp2
                         */
 
-            int check = 0;
-            ArrayRecommandback[3] = -1;
-            ArrayRecommandba[3] = -1;
-            ArrayRecommandobp[3] = -1;
-            ArrayRecommandrbi[3] = -1;
+            int check = 0, defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+                ArrayRecommandback[3] = Arrayback[defaltcheck];
+                ArrayRecommandba[3] = Arrayba[defaltcheck];
+                ArrayRecommandobp[3] = Arrayobp[defaltcheck];
+                ArrayRecommandrbi[3] = Arrayrbi[defaltcheck];
+
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandrbi[3]<Arrayrbi[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandrbi[3]<=Arrayrbi[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[3] = Arrayback[i];
@@ -172,15 +176,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[3] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[2] = -1;
-            ArrayRecommandba[2] = -1;
-            ArrayRecommandobp[2] = -1;
-            ArrayRecommandrbi[2] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[2] = Arrayback[defaltcheck];
+            ArrayRecommandba[2] = Arrayba[defaltcheck];
+            ArrayRecommandobp[2] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[2] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandba[2]<Arrayba[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandba[2]<=Arrayba[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[2] = Arrayback[i];
@@ -189,15 +197,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[2] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[0] = -1;
-            ArrayRecommandba[0] = -1;
-            ArrayRecommandobp[0] = -1;
-            ArrayRecommandrbi[0] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[0] = Arrayback[defaltcheck];
+            ArrayRecommandba[0] = Arrayba[defaltcheck];
+            ArrayRecommandobp[0] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[0] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandobp[0]<Arrayobp[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandobp[0]<=Arrayobp[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[0] = Arrayback[i];
@@ -206,15 +218,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[0] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[1] = -1;
-            ArrayRecommandba[1] = -1;
-            ArrayRecommandobp[1] = -1;
-            ArrayRecommandrbi[1] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[1] = Arrayback[defaltcheck];
+            ArrayRecommandba[1] = Arrayba[defaltcheck];
+            ArrayRecommandobp[1] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[1] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandba[1]<Arrayba[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandba[1]<=Arrayba[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[1] = Arrayback[i];
@@ -223,15 +239,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[1] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[4] = -1;
-            ArrayRecommandba[4] = -1;
-            ArrayRecommandobp[4] = -1;
-            ArrayRecommandrbi[4] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[4] = Arrayback[defaltcheck];
+            ArrayRecommandba[4] = Arrayba[defaltcheck];
+            ArrayRecommandobp[4] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[4] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandrbi[4]<Arrayrbi[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandrbi[4]<=Arrayrbi[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[4] = Arrayback[i];
@@ -240,15 +260,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[4] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[9] = -1;
-            ArrayRecommandba[9] = -1;
-            ArrayRecommandobp[9] = -1;
-            ArrayRecommandrbi[9] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[9] = Arrayback[defaltcheck];
+            ArrayRecommandba[9] = Arrayba[defaltcheck];
+            ArrayRecommandobp[9] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[9] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandobp[9]<Arrayobp[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandobp[9]<=Arrayobp[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[9] = Arrayback[i];
@@ -257,15 +281,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[9] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[5] = -1;
-            ArrayRecommandba[5] = -1;
-            ArrayRecommandobp[5] = -1;
-            ArrayRecommandrbi[5] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[5] = Arrayback[defaltcheck];
+            ArrayRecommandba[5] = Arrayba[defaltcheck];
+            ArrayRecommandobp[5] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[5] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandrbi[5]<Arrayrbi[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandrbi[5]<=Arrayrbi[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[5] = Arrayback[i];
@@ -274,15 +302,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[5] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[6] = -1;
-            ArrayRecommandba[6] = -1;
-            ArrayRecommandobp[6] = -1;
-            ArrayRecommandrbi[6] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[6] = Arrayback[defaltcheck];
+            ArrayRecommandba[6] = Arrayba[defaltcheck];
+            ArrayRecommandobp[6] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[6] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandba[6]<Arrayba[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandba[6]<=Arrayba[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[6] = Arrayback[i];
@@ -291,15 +323,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[6] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[7] = -1;
-            ArrayRecommandba[7] = -1;
-            ArrayRecommandobp[7] = -1;
-            ArrayRecommandrbi[7] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[7] = Arrayback[defaltcheck];
+            ArrayRecommandba[7] = Arrayba[defaltcheck];
+            ArrayRecommandobp[7] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[7] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandba[7]<Arrayba[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandba[7]<=Arrayba[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[7] = Arrayback[i];
@@ -308,15 +344,19 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[7] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
             check = 0;
-            ArrayRecommandback[8] = -1;
-            ArrayRecommandba[8] = -1;
-            ArrayRecommandobp[8] = -1;
-            ArrayRecommandrbi[8] = -1;
+            defaltcheck=0;
+            while(Arrayback[defaltcheck]==-1) {
+                defaltcheck++;
+            }
+            ArrayRecommandback[8] = Arrayback[defaltcheck];
+            ArrayRecommandba[8] = Arrayba[defaltcheck];
+            ArrayRecommandobp[8] = Arrayobp[defaltcheck];
+            ArrayRecommandrbi[8] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandobp[0]<Arrayobp[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandobp[0]<=Arrayobp[i]&&Arrayback[i]!=-1) {
 
                     check = i;
                     ArrayRecommandback[8] = Arrayback[i];
@@ -325,7 +365,7 @@ public class ShowRecommandList extends AppCompatActivity {
                     ArrayRecommandrbi[8] = Arrayrbi[i];
                 }
             }
-            ArrayRecommandback[check] = -1;
+            Arrayback[check] = -1;
 
 
             StringRecommandListShow = "";

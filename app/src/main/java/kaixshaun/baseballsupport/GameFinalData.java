@@ -30,8 +30,8 @@ public class GameFinalData extends AppCompatActivity {
         awayteamorder = db.selestorder(gameid,awayteamid);
         hometeamorder = db.selestorder(gameid,hometeamid);
 
-        caculatefinaldata(awayteamorder,gameid,awayteamid);
-        caculatefinaldata(hometeamorder,gameid,hometeamid);
+        caculatefinaldata(awayteamorder,gameid,awayteamid,hometeamid);
+        caculatefinaldata(hometeamorder,gameid,hometeamid,awayteamid);
 
 
 
@@ -39,10 +39,17 @@ public class GameFinalData extends AppCompatActivity {
         hometeamview = (TextView)findViewById(R.id.hometeamrecording);
 
         awayteamrecording = db.selectfinalrecord(gameid,awayteamid);
-        hometeamrecording = db.selectfinalrecord(gameid,hometeamid);
+        Cursor teamname_c = db.selectteamname(awayteamid);
+        String[] tempnames =teamname_c.getColumnNames();
+        teamname_c.moveToFirst();
+        showfinaldata(awayteamrecording,awayteamview,teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
 
-        showfinaldata(awayteamrecording,awayteamview);
-        showfinaldata(hometeamrecording,hometeamview);
+
+        hometeamrecording = db.selectfinalrecord(gameid,hometeamid);
+        teamname_c = db.selectteamname(hometeamid);
+        tempnames =teamname_c.getColumnNames();
+        teamname_c.moveToFirst();
+        showfinaldata(hometeamrecording,hometeamview,teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
 
 
     }
@@ -57,9 +64,9 @@ public class GameFinalData extends AppCompatActivity {
         hometeamid = intent.getStringExtra(PlayRecording.HomeTeamID);
     }
 
-    private void showfinaldata(Cursor c, TextView show){
+    private void showfinaldata(Cursor c, TextView show, String teamname){
 
-        String temp = "";
+        String temp = teamname + "\n";
         String[] names;
         c.moveToFirst();
         names = c.getColumnNames();
@@ -80,7 +87,7 @@ public class GameFinalData extends AppCompatActivity {
         show.setText(temp);
     }
 
-    private void caculatefinaldata( Cursor c, String gameid, String teamid){
+    private void caculatefinaldata( Cursor c, String gameid, String teamid,String anotherteamid){
 
         int back,order,rule,pa,hit,walk,error,rbi,temppa;
         float ba,obp;
@@ -105,17 +112,21 @@ public class GameFinalData extends AppCompatActivity {
                 temppa=1;
             else
                 temppa = pa;
-            ba = hit / temppa;
+            ba = (float) hit / temppa;
 
-            tempc = db.selectdied(gameid, teamid, back);
-            obp = (pa-tempc.getCount())/temppa;
+            int D,K;
+            tempc = db.selectdiedD(gameid, teamid, back);
+            D = tempc.getCount();
+            tempc = db.selectdiedK(gameid, teamid, back);
+            K =tempc.getCount();
+            obp =(float) (pa-D-K)/temppa;
             if(obp <= 0)
                 obp = 0;
 
             tempc = db.selectwalk(gameid, teamid, back);
             walk = tempc.getCount();
 
-            tempc = db.selecterror(gameid, teamid, back);
+            tempc = db.selecterror(gameid, anotherteamid, rule);
             error = tempc.getCount();
 
             tempc = db.selectrbi(gameid, teamid, back);

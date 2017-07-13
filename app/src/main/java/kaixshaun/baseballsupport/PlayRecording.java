@@ -201,7 +201,7 @@ public class PlayRecording extends AppCompatActivity {
         ArrayAdapter<String> situationlist = new ArrayAdapter<String>(PlayRecording.this, android.R.layout.simple_spinner_dropdown_item, situation);
         SituationView.setAdapter(situationlist);
 
-        final String[] diedway = {"無", "刺殺", "阻殺", "界K", "揮K", "看K"};
+        final String[] diedway = {"無", "刺殺", "阻殺", "接殺", "K"};
         DiedwayView = (Spinner) findViewById(R.id.Diedway);
         ArrayAdapter<String> diedwaylist = new ArrayAdapter<String>(PlayRecording.this, android.R.layout.simple_spinner_dropdown_item, diedway);
         DiedwayView.setAdapter(diedwaylist);
@@ -223,8 +223,9 @@ public class PlayRecording extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
+            boolean check = true;
             //儲存進DB時打擊狀況設定
-            if (getspinnerstring(DiedwayView) != "無") {         //  當打者上壘"沒上壘"時的狀況設定
+            if (getspinnerstring(DiedwayView) != "無" && getspinnerstring(DiedwayView) != "K") {         //  當打者上壘"沒上壘"時的狀況設定
 
                 base = "無";
                 situation = "D";
@@ -233,7 +234,17 @@ public class PlayRecording extends AppCompatActivity {
                 flyto = turnflyto(getspinnerstring(FlytoView));
                 rbi = getspinnerint(GetScoreView);
 
-            } else if(getspinnerstring(BaseView) == "保送"){
+            }else if(getspinnerstring(DiedwayView) != "無" && getspinnerstring(DiedwayView) == "K"){
+
+                base = "無";
+                situation = "K";
+
+                out = 1;
+                flyto = 0;
+                rbi = 0;
+
+
+            } else if(getspinnerstring(DiedwayView) == "無" && getspinnerstring(BaseView) == "保送"){
 
                 base = "無";
                 situation = "保送";
@@ -241,77 +252,91 @@ public class PlayRecording extends AppCompatActivity {
                 flyto = 0;
                 rbi = getspinnerint(GetScoreView);
 
-            } else {        //  當打者"上壘"時的狀況設定
+            } else if(getspinnerstring(DiedwayView) == "無" && (getspinnerstring(BaseView) == "1" || getspinnerstring(BaseView) == "2" || getspinnerstring(BaseView) == "3" || getspinnerstring(BaseView) == "全壘打")){
+                //  當打者"上壘"時的狀況設定
 
                 base = getspinnerstring(BaseView);
                 situation = getspinnerstring(B_EView);
                 out = getspinnerint(KillView);
-                if (getspinnerstring(BaseView) != "全壘打")
-                    flyto = turnflyto(getspinnerstring(FlytoView));
-                else
+                if (getspinnerstring(BaseView) == "全壘打") {
                     flyto = 0;
+                    situation = "B";
+                    out = 0;
+                }
+                else
+                    flyto = turnflyto(getspinnerstring(FlytoView));
                 rbi = getspinnerint(GetScoreView);
             }
+            else{
 
-            //  將打擊紀錄存進DB
-            db.insertRecord(gameid, teamid, back, inning, 0, order, base, situation, flyto, out, rbi, "");
-
-            //  紀錄半局的出局數
-            gameout = gameout + getspinnerint(KillView);
-
-            //  當出局數為3時轉換半局
-            if (gameout >= 3) {
-
-                inninghalf++;
-                gameout = 0;
-                rbi = 0;
+                Toast toast = Toast.makeText(PlayRecording.this,"輸入錯誤請重填!!",Toast.LENGTH_LONG);
+                toast.show();
+                check = false;
             }
 
-            //  判斷上下半局
-            if (inninghalf % 2 == 0) {  //  上半局
+           if(check) {
 
-                awayscore = awayscore + rbi;    //  計算分數
-                awayteamno++;   //  下位打者
+               //  將打擊紀錄存進DB
+               db.insertRecord(gameid, teamid, back, inning, 0, order, base, situation, flyto, out, rbi, "");
+               checkdata(gameid,teamid);
 
-                if (awayteamno >= 10) { //  當棒次超過10換回第一棒
-                    awayteamno = 0;
-                }
+               //  紀錄半局的出局數
+               gameout = gameout + out;
 
-                teamid = awayteamid;
-                inning = inninghalf/2+1;
-                showInning = inning + " 上";
-                InningView.setText(showInning);
-                OutView.setText(gameout+"");
-                ScoreView.setText(awayscore + " - " + homescore);
-                BackView.setText(awayteamback[awayteamno]+"");
-                RuleView.setText(turnrule(awayteamrule[awayteamno]));
-                No_View.setText((awayteamno + 1)+"");
+               //  當出局數為3時轉換半局
+               if (gameout >= 3) {
 
-                back = awayteamback[awayteamno];
-                rule = awayteamrule[awayteamno];
-                order = awayteamno + 1;
+                   inninghalf++;
+                   gameout = 0;
+                   rbi = 0;
+               }
 
-            } else {    //  下半局
+               //  判斷上下半局
+               if (inninghalf % 2 == 0) {  //  上半局
 
-                homescore = homescore + rbi;
-                if (hometeamno >= 10) {
-                    hometeamno = 0;
-                }
-                teamid = hometeamid;
-                inning = inninghalf/2+1;
-                showInning = inning + " 下";
-                InningView.setText(showInning);
-                OutView.setText(gameout+"");
-                ScoreView.setText(awayscore + " - " + homescore);
-                BackView.setText(hometeamback[hometeamno]+"");
-                RuleView.setText(turnrule(hometeamrule[hometeamno]));
-                No_View.setText((hometeamno + 1)+"");
+                   awayscore = awayscore + rbi;    //  計算分數
+                   awayteamno++;   //  下位打者
 
-                back = hometeamback[hometeamno];
-                rule = hometeamrule[hometeamno];
-                order = hometeamno + 1;
-                hometeamno++;
-            }
+                   if (awayteamno >= 10) { //  當棒次超過10換回第一棒
+                       awayteamno = 0;
+                   }
+
+                   teamid = awayteamid;
+                   inning = inninghalf / 2 + 1;
+                   showInning = inning + " 上";
+                   InningView.setText(showInning);
+                   OutView.setText(gameout + "");
+                   ScoreView.setText(awayscore + " - " + homescore);
+                   BackView.setText(awayteamback[awayteamno] + "");
+                   RuleView.setText(turnrule(awayteamrule[awayteamno]));
+                   No_View.setText((awayteamno + 1) + "");
+
+                   back = awayteamback[awayteamno];
+                   rule = awayteamrule[awayteamno];
+                   order = awayteamno + 1;
+
+               } else {    //  下半局
+
+                   homescore = homescore + rbi;
+                   if (hometeamno >= 10) {
+                       hometeamno = 0;
+                   }
+                   teamid = hometeamid;
+                   inning = inninghalf / 2 + 1;
+                   showInning = inning + " 下";
+                   InningView.setText(showInning);
+                   OutView.setText(gameout + "");
+                   ScoreView.setText(awayscore + " - " + homescore);
+                   BackView.setText(hometeamback[hometeamno] + "");
+                   RuleView.setText(turnrule(hometeamrule[hometeamno]));
+                   No_View.setText((hometeamno + 1) + "");
+
+                   back = hometeamback[hometeamno];
+                   rule = hometeamrule[hometeamno];
+                   order = hometeamno + 1;
+                   hometeamno++;
+               }
+           }
         }
 
     };
@@ -330,4 +355,26 @@ public class PlayRecording extends AppCompatActivity {
             PlayRecording.this.finish();
         }
     };
+
+    public void checkdata(String gameid,String teamid){
+
+        String temp="";
+        Cursor c = db.selectrecording(gameid,teamid);
+
+
+        c.moveToFirst();
+        String[] debugnames = c.getColumnNames();
+        for(int i = 0; i < c.getCount(); i ++){
+
+            temp = temp+c.getInt(c.getColumnIndex(debugnames[3])) + " 號  " +
+                    c.getInt(c.getColumnIndex(debugnames[4])) + " 上  " +
+                    c.getInt(c.getColumnIndex(debugnames[6])) + " 棒  " +
+                    c.getString(c.getColumnIndex(debugnames[8])) + "  飛去" +
+                    c.getInt(c.getColumnIndex(debugnames[9])) + "   " +
+                    c.getInt(c.getColumnIndex(debugnames[10])) + " out   得" +
+                    c.getInt(c.getColumnIndex(debugnames[11])) + " 分\n";
+            c.moveToNext();
+        }
+        Log.v("Debug",temp);
+    }
 }
