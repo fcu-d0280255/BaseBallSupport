@@ -9,10 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class Secret extends AppCompatActivity {
+public class GameSecret extends AppCompatActivity {
 
     ListView listView;
     String[] templist,names;
@@ -23,11 +20,11 @@ public class Secret extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secret);
+        setContentView(R.layout.activity_game_secret);
 
         db = new BaseballDB(this);
 
-        Cursor c = db.selectteamname();
+        Cursor c = db.selectgame();
         templist = new String[c.getCount()];
         names = c.getColumnNames();
 
@@ -46,11 +43,11 @@ public class Secret extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 choice = templist[position];
-                Cursor tempc = db.selectteamid(choice);
+                Cursor tempc = db.selectGameID(choice);
                 String[] names = tempc.getColumnNames();
                 tempc.moveToFirst();
-                String teamid = tempc.getString(tempc.getColumnIndex(names[0]));
-                db.deleteteamdata(teamid);
+                String gameid = tempc.getString(tempc.getColumnIndex(names[0]));
+                db.deletegame(gameid);
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
@@ -58,4 +55,5 @@ public class Secret extends AppCompatActivity {
             }
         });
     }
+
 }

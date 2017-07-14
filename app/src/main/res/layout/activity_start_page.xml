@@ -41,6 +41,7 @@
                     android:layout_height="wrap_content"
 
                     android:text="開新球局"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -58,6 +59,24 @@
 
                     android:text="推薦名單"
                     android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/O_D_Strategy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="攻守策略"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -74,6 +93,7 @@
 
                     android:text="球賽紀錄"
                     android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="TextView"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/Out"
@@ -49,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="12"
                 android:text="TextView"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -253,6 +255,7 @@
                         android:layout_weight="1"
                         android:text="下一位"
                         android:textAllCaps="false"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -268,6 +271,7 @@
                         android:layout_height="wrap_content"
                         android:text="比賽結束"
                         android:textAllCaps="false"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 

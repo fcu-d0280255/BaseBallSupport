@@ -201,6 +201,11 @@ public class BaseballDB {
         db.delete("Team", whereteamid, null);
     }
 
+    public void deletegame(String gameid){
+
+        String wheregameid = "GameID =  '" + gameid + "'";
+        db.delete("Game", wheregameid, null);
+    }
 
 
     public Cursor selsectteam(String teamid){
@@ -224,6 +229,12 @@ public class BaseballDB {
     public Cursor selectrecording(String gameid, String teamid){
 
         Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' " ,null);
+        return c;
+    }
+
+    public Cursor selectrecording(String gameid, String teamid,int back){
+
+        Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back = '" + back +"'",null);
         return c;
     }
 

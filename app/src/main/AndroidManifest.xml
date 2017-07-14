@@ -27,7 +27,10 @@
         <activity android:name=".ShowRecommandList" />
         <activity android:name=".Secret" />
         <activity android:name=".ShowGameList" />
-        <activity android:name=".ShowGameData"></activity>
+        <activity android:name=".ShowGameData" />
+        <activity android:name=".EnemyList" />
+        <activity android:name=".ShowODStrategy" />
+        <activity android:name=".GameSecret"></activity>
     </application>
 
 </manifest>

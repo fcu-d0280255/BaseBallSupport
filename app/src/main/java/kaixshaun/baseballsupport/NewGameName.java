@@ -10,11 +10,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class NewGameName extends AppCompatActivity {
+
     public static final String GameID = "GameID";
     BaseballDB db;
     EditText gamename;
     Button enter,cancel;
     String gameid;
+    String gameName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +40,13 @@ public class NewGameName extends AppCompatActivity {
 
 
             //得到gameid
-            String gameName = gamename.getText().toString();
-            Log.v("test",gameName);
-            gameid = db.insertGamename(gameName);
-            Log.v("test",gameid);
+            if(gamename.getText().toString() != "shaunlin168" && gamename.getText().toString() != "h4681656") {
+
+                gameName = gamename.getText().toString();
+                Log.v("test",gameName);
+                gameid = db.insertGamename(gameName);
+                Log.v("test",gameid);
+            }
 
             //傳gameid給別的activity
             intent.putExtra(GameID, gameid);
@@ -55,6 +61,12 @@ public class NewGameName extends AppCompatActivity {
                 startActivity(intent);
                 NewGameName.this.finish();
 
+            }
+            else if(gameName.equals("h4681656")){
+
+                intent.setClass(NewGameName.this,GameSecret.class);
+                startActivity(intent);
+                NewGameName.this.finish();
             }
             else{
                 //換頁面的參數

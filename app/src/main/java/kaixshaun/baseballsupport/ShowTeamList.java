@@ -20,6 +20,7 @@ public class ShowTeamList extends AppCompatActivity {
     ArrayAdapter<String> listAdapter;
     BaseballDB db;
     String choice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,9 +38,6 @@ public class ShowGameList extends AppCompatActivity {
             c.moveToNext();
         }
 
-
-
-
         listView = (ListView)findViewById(R.id.GameList);
         listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,templist);
         listView.setAdapter(listAdapter);

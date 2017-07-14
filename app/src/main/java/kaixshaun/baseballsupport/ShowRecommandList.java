@@ -387,7 +387,7 @@ public class ShowRecommandList extends AppCompatActivity {
 
         Intent intent = getIntent();
         Stringteam = intent.getStringExtra(ShowTeamList.Choice);
-        teamname.setText("隊名: "+Stringteam);
+        teamname.setText(Stringteam);
     }
 
     private void layoutset(Cursor c){
