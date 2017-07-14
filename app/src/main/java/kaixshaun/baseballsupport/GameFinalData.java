@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class GameFinalData extends AppCompatActivity {
 
-    TextView awayteamview,hometeamview;
+    TextView awayteamview,hometeamview,awayteamnameview,hometeamnameview;
     String gameid,awayteamid,hometeamid;
     Cursor awayteamrecording,hometeamrecording,awayteamorder,hometeamorder;
     BaseballDB db;
@@ -37,19 +37,24 @@ public class GameFinalData extends AppCompatActivity {
 
         awayteamview = (TextView)findViewById(R.id.awayteamrecording);
         hometeamview = (TextView)findViewById(R.id.hometeamrecording);
+        awayteamnameview = (TextView)findViewById(R.id.awayteamname);
+        hometeamnameview = (TextView)findViewById(R.id.hometeamname);
+
 
         awayteamrecording = db.selectfinalrecord(gameid,awayteamid);
         Cursor teamname_c = db.selectteamname(awayteamid);
         String[] tempnames =teamname_c.getColumnNames();
         teamname_c.moveToFirst();
-        showfinaldata(awayteamrecording,awayteamview,teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
+        showfinaldata(awayteamrecording,awayteamview);
+        awayteamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
 
 
         hometeamrecording = db.selectfinalrecord(gameid,hometeamid);
         teamname_c = db.selectteamname(hometeamid);
         tempnames =teamname_c.getColumnNames();
         teamname_c.moveToFirst();
-        showfinaldata(hometeamrecording,hometeamview,teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
+        showfinaldata(hometeamrecording,hometeamview);
+        hometeamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
 
 
     }
@@ -64,24 +69,24 @@ public class GameFinalData extends AppCompatActivity {
         hometeamid = intent.getStringExtra(PlayRecording.HomeTeamID);
     }
 
-    private void showfinaldata(Cursor c, TextView show, String teamname){
+    private void showfinaldata(Cursor c, TextView show){
 
-        String temp = teamname + "\n";
+        String temp ="";
         String[] names;
         c.moveToFirst();
         names = c.getColumnNames();
         for(int i = 0; i < c.getCount(); i ++){
 
-            temp = temp + c.getInt(c.getColumnIndex(names[3])) + " 號  " +
-                    c.getInt(c.getColumnIndex(names[4])) + " 棒  守位: " +
-                    c.getInt(c.getColumnIndex(names[5])) + "   " +
-                    c.getInt(c.getColumnIndex(names[6])) + " 打席  打擊率: " +
-                    c.getFloat(c.getColumnIndex(names[7])) + "   上壘率: " +
-                    c.getFloat(c.getColumnIndex(names[8])) + "   安打數: " +
-                    c.getInt(c.getColumnIndex(names[9])) + "  保送: " +
-                    c.getInt(c.getColumnIndex(names[10])) + "  失誤: " +
-                    c.getInt(c.getColumnIndex(names[11])) + " 次  打點: " +
-                    c.getInt(c.getColumnIndex(names[12])) + " 分\n";
+            temp = temp + c.getInt(c.getColumnIndex(names[3])) + "號 " +
+                    c.getInt(c.getColumnIndex(names[4])) + "棒   守位:" +
+                    c.getInt(c.getColumnIndex(names[5])) + "    " +
+                    c.getInt(c.getColumnIndex(names[6])) + "打席  打擊率: " +
+                    c.getFloat(c.getColumnIndex(names[7])) + "  上壘率:" +
+                    c.getFloat(c.getColumnIndex(names[8])) + "  安打數:" +
+                    c.getInt(c.getColumnIndex(names[9])) + "    保送: " +
+                    c.getInt(c.getColumnIndex(names[10])) + "   失誤: " +
+                    c.getInt(c.getColumnIndex(names[11])) + "次  打點: " +
+                    c.getInt(c.getColumnIndex(names[12])) + "分\n\n";
             c.moveToNext();
         }
         show.setText(temp);

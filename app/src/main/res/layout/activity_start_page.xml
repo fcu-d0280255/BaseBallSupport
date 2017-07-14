@@ -40,7 +40,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:text="開新球局" />
+                    android:text="開新球局"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -56,7 +57,8 @@
                     android:layout_height="wrap_content"
 
                     android:text="推薦名單"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -71,7 +73,8 @@
                     android:layout_height="wrap_content"
 
                     android:text="球賽紀錄"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

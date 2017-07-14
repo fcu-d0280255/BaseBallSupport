@@ -425,7 +425,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="儲存名單"
-                android:textSize="20sp" />
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/startgame_btn"
@@ -434,7 +436,9 @@
                 android:layout_weight="1"
                 android:text="比賽開始"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>

@@ -310,4 +310,26 @@ public class BaseballDB {
         return c;
     }
 
+    public Cursor selectGameID(String gamename){
+
+        Cursor c = db.rawQuery("select GameID from Game where GameName = '"+ gamename +"'" ,null);
+        return  c;
+    }
+
+    public String selectawayteamid(String gameid){
+
+        Cursor c = db.rawQuery("select AwayTeamID from Game where GameID = '" + gameid + "'" ,null);
+        c.moveToFirst();
+
+        return  c.getString(0);
+    }
+
+    public String selecthometeamid(String gameid){
+
+        Cursor c = db.rawQuery("select HomeTeamID from Game where GameID = '" + gameid + "'" ,null);
+        c.moveToFirst();
+
+        return  c.getString(0);
+    }
+
 }

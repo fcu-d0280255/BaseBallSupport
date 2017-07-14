@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -374,7 +373,7 @@ public class ShowRecommandList extends AppCompatActivity {
                         + ArrayRecommandback[i-1] + "  號   " + "打擊率  :  "
                         + ArrayRecommandba[i-1] + "   上壘率 : "
                         + ArrayRecommandobp[i-1] + "   打點 : "
-                        + ArrayRecommandrbi[i-1] + "  分\n";
+                        + ArrayRecommandrbi[i-1] + "  分\n\n";
 
             }
 
@@ -387,7 +386,7 @@ public class ShowRecommandList extends AppCompatActivity {
     private void setteam(){
 
         Intent intent = getIntent();
-        Stringteam = intent.getStringExtra(ShowGameList.Choice);
+        Stringteam = intent.getStringExtra(ShowTeamList.Choice);
         teamname.setText("隊名: "+Stringteam);
     }
 
