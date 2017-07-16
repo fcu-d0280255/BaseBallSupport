@@ -2,6 +2,7 @@ package kaixshaun.baseballsupport;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.drm.DrmStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +20,7 @@ public class PlayRecording extends AppCompatActivity {
     public static final String AwayTeamID = "AwayTeamID";
     public static final String GameID = "GameID";
 
-    TextView InningView, OutView, ScoreView, BackView, RuleView, No_View;
+    TextView InningView, OutView, ScoreView, BackView, RuleView, No_View,ODListView;
     Spinner FlytoView, BaseView, B_EView, SituationView, DiedwayView, KillView, GetScoreView;
     Button NextBtn, FinishBtn;
 
@@ -175,6 +176,7 @@ public class PlayRecording extends AppCompatActivity {
         BackView = (TextView) findViewById(R.id.Back);
         RuleView = (TextView) findViewById(R.id.Rule);
         No_View = (TextView) findViewById(R.id.No_);
+        ODListView = (TextView) findViewById(R.id.ODList);
 
         final String[] getscore = {"0", "1", "2", "3", "4"};
         GetScoreView = (Spinner) findViewById(R.id.GetScore);
@@ -346,6 +348,7 @@ public class PlayRecording extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
+            db.updatescore(gameid,awayscore,homescore);
             Intent intent = new Intent();
             intent.putExtra(AwayTeamID, awayteamid);
             intent.putExtra(HomeTeamID, hometeamid);

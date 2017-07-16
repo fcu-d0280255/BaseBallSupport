@@ -165,6 +165,11 @@ public class BaseballDB {
         db.insert("FinalData", null, cv);
     }
 
+     public void updatescore(String gameid,int awayscore,int homescore){
+
+         db.execSQL("UPDATE Game SET HomeScore = "+ homescore +", AwayScore = " + awayscore + " WHERE GameID = '" + gameid +"'");
+     }
+
     //刪除比賽
     //public boolean deletegame(String gameid)
 
@@ -291,9 +296,15 @@ public class BaseballDB {
         return c;
     }
 
-    public Cursor selectgame(){
+    public Cursor selectgamename(){
 
         Cursor c = db.rawQuery("select GameName from Game" ,null);
+        return c;
+    }
+
+    public Cursor selectgame(){
+
+        Cursor c = db.rawQuery("select * from Game" ,null);
         return c;
     }
 

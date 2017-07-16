@@ -47,6 +47,7 @@ public class NewGameName extends AppCompatActivity {
                 gameid = db.insertGamename(gameName);
                 Log.v("test",gameid);
             }
+            gameName = gamename.getText().toString();
 
             //傳gameid給別的activity
             intent.putExtra(GameID, gameid);

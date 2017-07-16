@@ -24,7 +24,7 @@ public class GameSecret extends AppCompatActivity {
 
         db = new BaseballDB(this);
 
-        Cursor c = db.selectgame();
+        Cursor c = db.selectgamename();
         templist = new String[c.getCount()];
         names = c.getColumnNames();
 

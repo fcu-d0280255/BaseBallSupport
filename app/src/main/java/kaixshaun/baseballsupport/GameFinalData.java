@@ -11,7 +11,7 @@ public class GameFinalData extends AppCompatActivity {
 
     TextView awayteamview,hometeamview,awayteamnameview,hometeamnameview;
     String gameid,awayteamid,hometeamid;
-    Cursor awayteamrecording,hometeamrecording,awayteamorder,hometeamorder;
+    Cursor awayteamrecording,hometeamrecording,awayteamorder,hometeamorder,gamescore_c;
     BaseballDB db;
 
     @Override
@@ -40,13 +40,16 @@ public class GameFinalData extends AppCompatActivity {
         awayteamnameview = (TextView)findViewById(R.id.awayteamname);
         hometeamnameview = (TextView)findViewById(R.id.hometeamname);
 
+        gamescore_c = db.selectgame();
+        String[] gamescorenames = gamescore_c.getColumnNames();
+        gamescore_c.moveToFirst();
 
         awayteamrecording = db.selectfinalrecord(gameid,awayteamid);
         Cursor teamname_c = db.selectteamname(awayteamid);
         String[] tempnames =teamname_c.getColumnNames();
         teamname_c.moveToFirst();
         showfinaldata(awayteamrecording,awayteamview);
-        awayteamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
+        awayteamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])) + "  分數:" +gamescore_c.getInt(gamescore_c.getColumnIndex(gamescorenames[4])));
 
 
         hometeamrecording = db.selectfinalrecord(gameid,hometeamid);
@@ -54,7 +57,7 @@ public class GameFinalData extends AppCompatActivity {
         tempnames =teamname_c.getColumnNames();
         teamname_c.moveToFirst();
         showfinaldata(hometeamrecording,hometeamview);
-        hometeamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])));
+        hometeamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0])) + "  分數: " +gamescore_c.getInt(gamescore_c.getColumnIndex(gamescorenames[3])));
 
 
     }
