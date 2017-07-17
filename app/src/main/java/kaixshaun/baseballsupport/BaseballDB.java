@@ -209,16 +209,13 @@ public class BaseballDB {
     public void deletegame(String gameid){
 
         String wheregameid = "GameID =  '" + gameid + "'";
-
         Cursor c = db.rawQuery("select AwayTeamID from Game WHERE GameID = '"+ gameid+ "'", null);
-        String[] names = c.getColumnNames();
         c.moveToFirst();
-        db.rawQuery("DELETE FROM Team WHERE TeamID = '"+c.getString(c.getColumnIndex(names[0]))+"'",null);
+        db.rawQuery("DELETE FROM Team WHERE TeamID = '"+c.getString(0)+"'",null);
 
         c = db.rawQuery("select HomeTeamID from Game WHERE GameID = '"+ gameid+ "'", null);
-        names = c.getColumnNames();
         c.moveToFirst();
-        db.rawQuery("DELETE FROM Team WHERE TeamID = '"+ c.getString(c.getColumnIndex(names[0])) +"'",null);
+        db.rawQuery("DELETE FROM Team WHERE TeamID = '"+ c.getString(0) +"'",null);
 
         db.delete("Game", wheregameid, null);
         db.delete("BattingOrder", wheregameid, null);
@@ -239,6 +236,12 @@ public class BaseballDB {
         return c;
     }
 
+    public Cursor selestorder(String teamid){
+
+        Cursor c = db.rawQuery("select * from BattingOrder where TeamID = '" + teamid + "'",null);
+        return c;
+    }
+
     public Cursor selectteamate(String gameid, String teamid){
 
         Cursor c = db.rawQuery("select * from Teammate where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' " ,null);
@@ -254,6 +257,12 @@ public class BaseballDB {
     public Cursor selectrecording(String gameid, String teamid,int back){
 
         Cursor c = db.rawQuery("select * from Record where GameID = '" + gameid + "' AND TeamID = '" + teamid + "' AND Back = '" + back +"'",null);
+        return c;
+    }
+
+    public Cursor selectrecording(String teamid,int back){
+
+        Cursor c = db.rawQuery("select * from Record where TeamID = '" + teamid + "' AND Back = '" + back +"'",null);
         return c;
     }
 
@@ -307,6 +316,12 @@ public class BaseballDB {
     public Cursor selectfinalrecord(String gameid, String teamid, int back){
 
         Cursor c = db.rawQuery("select * from FinalData where GameID = '" + gameid + "' AND TeamID = '" + teamid + "'AND Back ='" + back +"'" ,null);
+        return c;
+    }
+
+    public Cursor selectfinalrecord(String teamid, int back){
+
+        Cursor c = db.rawQuery("select * from FinalData where TeamID = '" + teamid + "'AND Back ='" + back +"'" ,null);
         return c;
     }
 

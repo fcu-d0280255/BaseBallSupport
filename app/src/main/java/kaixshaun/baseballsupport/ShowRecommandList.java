@@ -56,10 +56,13 @@ public class ShowRecommandList extends AppCompatActivity {
             Cursor teamid_c = db.selectteamid(Stringteam);
             String [] names = teamid_c.getColumnNames();
             teamid_c.moveToFirst();
+
             for(int i = 0; i < Intgames; i++){
                 Arrayteamid[i] = teamid_c.getString(teamid_c.getColumnIndex(names[0]));
+                teamid_c.moveToNext();
             }
 
+            /*
             //取得那幾場的gameid
             for(int i = 0; i < Intgames; i++) {
 
@@ -67,14 +70,14 @@ public class ShowRecommandList extends AppCompatActivity {
                 String[] tempnames = temp_c.getColumnNames();
                 temp_c.moveToFirst();
                 Arraygameid[i] = temp_c.getString(temp_c.getColumnIndex(tempnames[0]));
-            }
+            }*/
 
             //取得那幾場的背號
             int[] tempback = new int[Intgames*10];
             int index = 0;
             for (int i = 0; i < Intgames; i++){
 
-                Cursor tempback_c = db.selestorder(Arraygameid[i],Arrayteamid[i]);
+                Cursor tempback_c = db.selestorder(Arrayteamid[i]);
                 String[] tempnames = tempback_c.getColumnNames();
                 tempback_c.moveToFirst();
                 for(int j = index; j < index+10; j++){
@@ -82,6 +85,7 @@ public class ShowRecommandList extends AppCompatActivity {
                     tempback[j] = tempback_c.getInt(tempback_c.getColumnIndex(tempnames[3]));
                     tempback_c.moveToNext();
                 }
+                index = index+10;
             }
 
             //刪除重複背號
@@ -97,21 +101,24 @@ public class ShowRecommandList extends AppCompatActivity {
             for(int i = 0; i < Arrayback.length; i++ )
                 Log.v(i+"=>",Arrayback[i]+"");
 
+
             //計算球員數值
             float[] Arrayba = new float[Arrayback.length];
             float[] Arrayobp = new float[Arrayback.length];
             int[] Arrayrbi = new int[Arrayback.length];
             float tempba,tempobp;
             int temprbi,times;
+
             for(int i = 0; i< Arrayback.length; i++){
 
                 tempba=0;   tempobp=0;  temprbi=0;  times=0;
 
                 for(int j = 0; j < Intgames; j++){
 
-                    Cursor tempfinaldata_c = db.selectfinalrecord(Arraygameid[j],Arrayteamid[j],Arrayback[i]);
+                    Cursor tempfinaldata_c = db.selectfinalrecord(Arrayteamid[j],Arrayback[i]);
                     String[] tempfinaldatanames = tempfinaldata_c.getColumnNames();
                     tempfinaldata_c.moveToFirst();
+
                     if(tempfinaldata_c.getCount() > 0){
 
                         tempba = tempba + tempfinaldata_c.getFloat(tempfinaldata_c.getColumnIndex(tempfinaldatanames[7]));
@@ -129,8 +136,8 @@ public class ShowRecommandList extends AppCompatActivity {
                     temprbi = 0;
                 }else{
 
-                    tempba = tempba/times;
-                    tempobp = tempobp/times;
+                    tempba = (float)tempba/times;
+                    tempobp = (float)tempobp/times;
                 }
                 Arrayba[i] = tempba;
                 Arrayobp[i] = tempobp;
@@ -345,7 +352,6 @@ public class ShowRecommandList extends AppCompatActivity {
             }
             Arrayback[check] = -1;
 
-            check = 0;
             defaltcheck=0;
             while(Arrayback[defaltcheck]==-1) {
                 defaltcheck++;
@@ -355,16 +361,14 @@ public class ShowRecommandList extends AppCompatActivity {
             ArrayRecommandobp[8] = Arrayobp[defaltcheck];
             ArrayRecommandrbi[8] = Arrayrbi[defaltcheck];
             for(int i = 0; i < Arrayback.length; i++){
-                if(ArrayRecommandobp[0]<=Arrayobp[i]&&Arrayback[i]!=-1) {
+                if(ArrayRecommandobp[8]<=Arrayobp[i]&&Arrayback[i]!=-1) {
 
-                    check = i;
                     ArrayRecommandback[8] = Arrayback[i];
                     ArrayRecommandba[8] = Arrayba[i];
                     ArrayRecommandobp[8] = Arrayobp[i];
                     ArrayRecommandrbi[8] = Arrayrbi[i];
                 }
             }
-            Arrayback[check] = -1;
 
 
             StringRecommandListShow = "";

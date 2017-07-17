@@ -55,10 +55,14 @@ public class ShowODStrategy extends AppCompatActivity {
             Cursor teamid_c = db.selectteamid(Stringteam);
             String [] names = teamid_c.getColumnNames();
             teamid_c.moveToFirst();
+
             for(int i = 0; i < Intgames; i++){
+
                 Arrayteamid[i] = teamid_c.getString(teamid_c.getColumnIndex(names[0]));
+                teamid_c.moveToNext();
             }
 
+            /*
             //取得那幾場的gameid
             for(int i = 0; i < Intgames; i++) {
 
@@ -67,13 +71,14 @@ public class ShowODStrategy extends AppCompatActivity {
                 temp_c.moveToFirst();
                 Arraygameid[i] = temp_c.getString(temp_c.getColumnIndex(tempnames[0]));
             }
+            */
 
             //取得那幾場的背號
             int[] tempback = new int[Intgames*10];
             int index = 0;
             for (int i = 0; i < Intgames; i++){
 
-                Cursor tempback_c = db.selestorder(Arraygameid[i],Arrayteamid[i]);
+                Cursor tempback_c = db.selestorder(Arrayteamid[i]);
                 String[] tempnames = tempback_c.getColumnNames();
                 tempback_c.moveToFirst();
                 for(int j = index; j < index+10; j++){
@@ -81,6 +86,7 @@ public class ShowODStrategy extends AppCompatActivity {
                     tempback[j] = tempback_c.getInt(tempback_c.getColumnIndex(tempnames[3]));
                     tempback_c.moveToNext();
                 }
+                index = index+10;
             }
 
             //刪除重複背號
@@ -93,25 +99,30 @@ public class ShowODStrategy extends AppCompatActivity {
             for (int i = 0; i < tempArray.length; i++) {
                 Arrayback[i] = (int) tempArray[i];
             }
+            for(int i = 0; i < Arrayback.length; i++ )
+                Log.v(i+"=>",Arrayback[i]+"");
+
 
             ODShow = "";
             for(int i = 0; i < Arrayback.length; i++){
 
                 int error = 0;
                 ODShow = ODShow + Arrayback[i] + "號  ";
+
                 for(int j = 0; j < Intgames; j++){
 
-                    Cursor c = db.selectfinalrecord(Arraygameid[j],Arrayteamid[j],Arrayback[i]);
+                    Cursor c = db.selectfinalrecord(Arrayteamid[j],Arrayback[i]);
                     String[] cnames = c.getColumnNames();
                     c.moveToFirst();
-                    error = error + c.getInt(c.getColumnIndex(cnames[11]));
+                    if(c.getCount() > 0)
+                        error = error + c.getInt(c.getColumnIndex(cnames[11]));
 
                 }
 
                 ODShow = ODShow + "失誤 : " + error +"次  飛向: ";
                 for(int j = 0; j < Intgames; j++){
 
-                    Cursor c = db.selectrecording(Arraygameid[j],Arrayteamid[j],Arrayback[i]);
+                    Cursor c = db.selectrecording(Arrayteamid[j],Arrayback[i]);
                     String[] cnames = c.getColumnNames();
                     c.moveToFirst();
 

@@ -380,4 +380,134 @@ public class PlayRecording extends AppCompatActivity {
         }
         Log.v("Debug",temp);
     }
+
+    public void InputG2Data(String gameid,String awayteamid,String hometeamid){
+
+        db.insertRecord(gameid,hometeamid,7,1,0,1,"1","E",6,0,0,"");
+        db.insertRecord(gameid,hometeamid,7,3,0,1,"無","D",5,1,0,"");
+        db.insertRecord(gameid,hometeamid,7,5,0,1,"3","B",10,0,1,"");
+        db.insertRecord(gameid,hometeamid,15,1,0,2,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,15,3,0,2,"無","D",5,1,0,"");
+        db.insertRecord(gameid,hometeamid,15,5,0,2,"無","D",6,1,0,"");
+        db.insertRecord(gameid,hometeamid,29,1,0,3,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,29,3,0,3,"無","D",6,1,0,"");
+        db.insertRecord(gameid,hometeamid,6,1,0,4,"1","B",8,0,0,"");
+        db.insertRecord(gameid,hometeamid,6,4,0,4,"全壘打","B",0,0,1,"");
+        db.insertRecord(gameid,hometeamid,4,1,0,5,"無","D",1,2,0,"");
+        db.insertRecord(gameid,hometeamid,4,4,0,5,"無","D",4,1,0,"");
+        db.insertRecord(gameid,hometeamid,23,2,0,6,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,23,4,0,6,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,51,2,0,7,"1","B",7,0,0,"");
+        db.insertRecord(gameid,hometeamid,51,4,0,7,"無","D",6,1,0,"");
+        db.insertRecord(gameid,hometeamid,49,2,0,8,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,49,5,0,8,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,8,2,0,9,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,8,5,0,9,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,31,2,0,10,"無","D",3,1,0,"");
+        db.insertRecord(gameid,hometeamid,31,5,0,10,"無","D",10,1,0,"");
+
+        db.insertRecord(gameid,awayteamid,25,1,0,1,"無","D",4,1,0,"");
+        db.insertRecord(gameid,awayteamid,25,4,0,1,"1","E",4,0,0,"");
+        db.insertRecord(gameid,awayteamid,25,6,0,1,"無","D",5,1,0,"");
+        db.insertRecord(gameid,awayteamid,10,1,0,2,"無","D",3,1,0,"");
+        db.insertRecord(gameid,awayteamid,10,4,0,2,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,10,6,0,2,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,3,1,0,3,"無","D",1,1,0,"");
+        db.insertRecord(gameid,awayteamid,3,4,0,3,"無","D",8,1,0,"");
+        db.insertRecord(gameid,awayteamid,3,6,0,3,"無","D",7,1,0,"");
+        db.insertRecord(gameid,awayteamid,16,2,0,4,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,16,4,0,4,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,awayteamid,5,2,0,5,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,5,4,0,5,"無","D",2,1,0,"");
+        db.insertRecord(gameid,awayteamid,36,2,0,6,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,36,5,0,6,"2","E",8,0,0,"");
+        db.insertRecord(gameid,awayteamid,11,3,0,7,"無","D",7,1,0,"");
+        db.insertRecord(gameid,awayteamid,11,5,0,7,"1","B",4,0,1,"");
+        db.insertRecord(gameid,awayteamid,1,3,0,8,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,1,5,0,8,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,8,3,0,9,"無","D",10,1,0,"");
+        db.insertRecord(gameid,awayteamid,8,5,0,9,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,14,4,0,10,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,awayteamid,14,5,0,10,"無","D",6,1,0,"");
+
+        db.updatescore(gameid,1,2);
+    }
+
+    public void InputG1Data(String gameid,String awayteamid,String hometeamid) {
+
+        db.insertRecord(gameid,awayteamid,7,1,0,1,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,awayteamid,7,2,0,1,"2","B",6,0,2,"");
+        db.insertRecord(gameid,awayteamid,7,3,0,1,"1","B",6,0,2,"");
+        db.insertRecord(gameid,awayteamid,7,6,0,1,"全壘打","B",0,0,1,"");
+        db.insertRecord(gameid,awayteamid,15,1,0,2,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,15,2,0,2,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,15,3,0,2,"1","B",6,0,0,"");
+        db.insertRecord(gameid,awayteamid,15,6,0,2,"無","D",6,1,0,"");
+        db.insertRecord(gameid,awayteamid,29,1,0,3,"1","B",6,0,0,"");
+        db.insertRecord(gameid,awayteamid,29,2,0,3,"1","E",6,0,0,"");
+        db.insertRecord(gameid,awayteamid,29,3,0,3,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,29,6,0,3,"1","B",6,0,0,"");
+        db.insertRecord(gameid,awayteamid,6,1,0,4,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,6,2,0,4,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,6,4,0,4,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,6,6,0,4,"全壘打","B",0,0,2,"");
+        db.insertRecord(gameid,awayteamid,4,1,0,5,"1","B",4,0,0,"");
+        db.insertRecord(gameid,awayteamid,4,3,0,5,"2","B",4,0,0,"");
+        db.insertRecord(gameid,awayteamid,4,4,0,5,"無","D",4,1,0,"");
+        db.insertRecord(gameid,awayteamid,4,6,0,5,"無","D",4,1,0,"");
+        db.insertRecord(gameid,awayteamid,47,1,0,6,"無","D",4,1,0,"");
+        db.insertRecord(gameid,awayteamid,47,3,0,6,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,47,4,0,6,"無","D",4,1,0,"");
+        db.insertRecord(gameid,awayteamid,47,6,0,6,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,51,2,0,7,"1","E",7,0,0,"");
+        db.insertRecord(gameid,awayteamid,51,3,0,7,"1","B",7,0,0,"");
+        db.insertRecord(gameid,awayteamid,51,5,0,7,"無","D",7,1,0,"");
+        db.insertRecord(gameid,awayteamid,60,2,0,8,"1","B",3,0,0,"");
+        db.insertRecord(gameid,awayteamid,60,3,0,8,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,awayteamid,60,5,0,8,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,3,2,0,9,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,awayteamid,3,3,0,9,"無","保送",0,0,1,"");
+        db.insertRecord(gameid,awayteamid,3,5,0,9,"1","B",3,0,0,"");
+        db.insertRecord(gameid,awayteamid,31,2,0,10,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,31,3,0,10,"無","K",0,1,0,"");
+        db.insertRecord(gameid,awayteamid,31,5,0,10,"無","K",0,1,0,"");
+
+        db.insertRecord(gameid,hometeamid,4,1,0,1,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,4,2,0,1,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,4,4,0,1,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,4,6,0,1,"2","B",9,0,0,"");
+        db.insertRecord(gameid,hometeamid,10,1,0,2,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,10,2,0,2,"1","B",3,0,1,"");
+        db.insertRecord(gameid,hometeamid,10,4,0,2,"1","B",3,0,0,"");
+        db.insertRecord(gameid,hometeamid,10,6,0,2,"1","B",10,0,0,"");
+        db.insertRecord(gameid,hometeamid,31,1,0,3,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,31,2,0,3,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,31,4,0,3,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,31,6,0,3,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,16,1,0,4,"1","E",4,0,0,"");
+        db.insertRecord(gameid,hometeamid,16,2,0,4,"2","B",8,0,3,"");
+        db.insertRecord(gameid,hometeamid,16,4,0,4,"1","B",8,0,2,"");
+        db.insertRecord(gameid,hometeamid,16,6,0,4,"1","B",6,0,1,"");
+        db.insertRecord(gameid,hometeamid,5,1,0,5,"1","B",8,0,2,"");
+        db.insertRecord(gameid,hometeamid,5,2,0,5,"無","D",8,1,0,"");
+        db.insertRecord(gameid,hometeamid,5,4,0,5,"無","D",8,1,0,"");
+        db.insertRecord(gameid,hometeamid,12,1,0,6,"無","D",5,1,0,"");
+        db.insertRecord(gameid,hometeamid,12,3,0,6,"無","D",6,1,0,"");
+        db.insertRecord(gameid,hometeamid,12,5,0,6,"無","D",10,1,0,"");
+        db.insertRecord(gameid,hometeamid,11,1,0,7,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,11,3,0,7,"無","D",7,1,0,"");
+        db.insertRecord(gameid,hometeamid,11,5,0,7,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,23,2,0,8,"2","E",8,0,0,"");
+        db.insertRecord(gameid,hometeamid,23,3,0,8,"無","K",0,1,0,"");
+        db.insertRecord(gameid,hometeamid,23,5,0,8,"無","D",7,1,0,"");
+        db.insertRecord(gameid,hometeamid,49,2,0,9,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,49,4,0,9,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,49,5,0,9,"無","D",6,1,0,"");
+        db.insertRecord(gameid,hometeamid,14,2,0,10,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,14,4,0,10,"無","保送",0,0,0,"");
+        db.insertRecord(gameid,hometeamid,14,6,0,10,"無","D",7,1,0,"");
+
+        db.updatescore(gameid,8,9);
+    }
+
 }
