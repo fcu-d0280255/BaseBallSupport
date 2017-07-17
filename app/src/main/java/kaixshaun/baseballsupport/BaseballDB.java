@@ -209,7 +209,21 @@ public class BaseballDB {
     public void deletegame(String gameid){
 
         String wheregameid = "GameID =  '" + gameid + "'";
+
+        Cursor c = db.rawQuery("select AwayTeamID from Game WHERE GameID = '"+ gameid+ "'", null);
+        String[] names = c.getColumnNames();
+        c.moveToFirst();
+        db.rawQuery("DELETE FROM Team WHERE TeamID = '"+c.getString(c.getColumnIndex(names[0]))+"'",null);
+
+        c = db.rawQuery("select HomeTeamID from Game WHERE GameID = '"+ gameid+ "'", null);
+        names = c.getColumnNames();
+        c.moveToFirst();
+        db.rawQuery("DELETE FROM Team WHERE TeamID = '"+ c.getString(c.getColumnIndex(names[0])) +"'",null);
+
         db.delete("Game", wheregameid, null);
+        db.delete("BattingOrder", wheregameid, null);
+        db.delete("Record", wheregameid, null);
+        db.delete("FinalData", wheregameid, null);
     }
 
 
@@ -302,9 +316,9 @@ public class BaseballDB {
         return c;
     }
 
-    public Cursor selectgame(){
+    public Cursor selectgame(String gameid){
 
-        Cursor c = db.rawQuery("select * from Game" ,null);
+        Cursor c = db.rawQuery("select * from Game where GameID = '"+ gameid +"'" ,null);
         return c;
     }
 

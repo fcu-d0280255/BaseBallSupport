@@ -35,7 +35,7 @@ public class ShowGameData extends AppCompatActivity {
         awayteamnameview = (TextView)findViewById(R.id.AwayteamName);
         hometeamnameview = (TextView)findViewById(R.id.HomeTeamName);
 
-        gamescore_c = db.selectgame();
+        gamescore_c = db.selectgame(gameid);
         String[] gamescorenames = gamescore_c.getColumnNames();
         gamescore_c.moveToFirst();
 
@@ -44,7 +44,7 @@ public class ShowGameData extends AppCompatActivity {
         String[] tempnames =teamname_c.getColumnNames();
         teamname_c.moveToFirst();
         showfinaldata(awayteamrecording,awayteamview);
-        awayteamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0]))+ "  分數:" +gamescore_c.getInt(gamescore_c.getColumnIndex(gamescorenames[4])));
+        awayteamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0]))+ "  分數:" +gamescore_c.getInt(gamescore_c.getColumnIndex(gamescorenames[6])));
 
 
         hometeamrecording = db.selectfinalrecord(gameid,hometeamid);
@@ -52,7 +52,7 @@ public class ShowGameData extends AppCompatActivity {
         tempnames =teamname_c.getColumnNames();
         teamname_c.moveToFirst();
         showfinaldata(hometeamrecording,hometeamview);
-        hometeamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0]))+ "  分數:" +gamescore_c.getInt(gamescore_c.getColumnIndex(gamescorenames[3])));
+        hometeamnameview.setText(teamname_c.getString(teamname_c.getColumnIndex(tempnames[0]))+ "  分數:" +gamescore_c.getInt(gamescore_c.getColumnIndex(gamescorenames[5])));
     }
 
     private void setteamname(){

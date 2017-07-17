@@ -40,7 +40,7 @@ public class NewGameName extends AppCompatActivity {
 
 
             //得到gameid
-            if(gamename.getText().toString() != "shaunlin168" && gamename.getText().toString() != "h4681656") {
+            if(!gamename.getText().toString().equals("shaunlin168") && !gamename.getText().toString().equals("h4681656")) {
 
                 gameName = gamename.getText().toString();
                 Log.v("test",gameName);

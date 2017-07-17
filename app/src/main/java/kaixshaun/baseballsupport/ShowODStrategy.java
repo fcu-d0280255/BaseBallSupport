@@ -40,6 +40,7 @@ public class ShowODStrategy extends AppCompatActivity {
         Cursor c = db.selectteamid(Stringteam);
         layoutset(c);
         taken.setOnClickListener(setlist);
+
     }
 
     private View.OnClickListener setlist = new View.OnClickListener() {
@@ -106,6 +107,7 @@ public class ShowODStrategy extends AppCompatActivity {
                     error = error + c.getInt(c.getColumnIndex(cnames[11]));
 
                 }
+
                 ODShow = ODShow + "失誤 : " + error +"次  飛向: ";
                 for(int j = 0; j < Intgames; j++){
 
@@ -117,13 +119,12 @@ public class ShowODStrategy extends AppCompatActivity {
 
                         if(c.getInt(c.getColumnIndex(cnames[9]))!=0)
                             ODShow = ODShow + c.getInt(c.getColumnIndex(cnames[9])) +" ";
+                        c.moveToNext();
                     }
                 }
                 ODShow = ODShow + "\n\n";
             }
             ODlist.setText(ODShow);
-
-
         }
     };
 
