@@ -1,6 +1,7 @@
 package kaixshaun.baseballsupport;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 public class StartPage extends AppCompatActivity {
 
     Button newgame,teamlist,recordgame,o_d_strategy;
+    BaseballDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,8 @@ public class StartPage extends AppCompatActivity {
         teamlist = (Button)findViewById(R.id.RecommendList_Btn);
         o_d_strategy = (Button)findViewById(R.id.O_D_Strategy);
         recordgame = (Button)findViewById(R.id.record_game_btn);
+
+        db = new BaseballDB(this);
 
         newgame.setOnClickListener(goto_newgame);
         teamlist.setOnClickListener(goto_teamlist);
@@ -36,6 +40,7 @@ public class StartPage extends AppCompatActivity {
     private View.OnClickListener goto_teamlist= new View.OnClickListener(){
         @Override
         public void onClick(View v) {
+
             Intent intent = new Intent();
             intent.setClass(StartPage.this,ShowTeamList.class);
             startActivity(intent);

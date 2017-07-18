@@ -201,10 +201,10 @@ public class BaseballDB {
         String whereteamid = "TeamID =  '" + teamid + "'";
         db.delete("Teammate", whereteamid, null);
         db.delete("BattingOrder", whereteamid, null);
-        db.delete("Record", whereteamid, null);
+            db.delete("Record", whereteamid, null);
         db.delete("FinalData", whereteamid, null);
         db.delete("Team", whereteamid, null);
-    }
+}
 
     public void deletegame(String gameid){
 
